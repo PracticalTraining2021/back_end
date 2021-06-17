@@ -1,0 +1,19 @@
+server:
+  port: 8888
+
+spring:
+  datasource:
+    username: root
+    password: '000111'
+    url: jdbc:mysql://localhost:3306/taptap?serverTimezone=UTC&useUnicode=true&charactorEncoding=utf-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  typeAliasesPackage: demo.domain.*
+
+# jwt
+jwt:
+  secret: aiaiaiaiaiaiaiaaaiaiia
+  issuer: pc_5
+  expires_second: 172800000
