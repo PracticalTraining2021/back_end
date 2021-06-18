@@ -1,3 +1,19 @@
+/*
+ Navicat MySQL Data Transfer
+
+ Source Server         : conn0
+ Source Server Type    : MySQL
+ Source Server Version : 80021
+ Source Host           : localhost:3306
+ Source Schema         : taptap
+
+ Target Server Type    : MySQL
+ Target Server Version : 80021
+ File Encoding         : 65001
+
+ Date: 18/06/2021 19:53:04
+*/
+
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
@@ -7,8 +23,8 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `comment`;
 CREATE TABLE `comment`  (
   `comment_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `game_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `user_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `game_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `user_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `content` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `score` int NULL DEFAULT NULL,
   `likes_count` int NULL DEFAULT NULL,
@@ -42,7 +58,6 @@ CREATE TABLE `game`  (
   `issuer` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `downloads` int NULL DEFAULT NULL,
   `avg_score` double NULL DEFAULT NULL,
-  `scored_count` int NULL DEFAULT NULL,
   `comment_count` int NULL DEFAULT NULL,
   `interest_count` int NULL DEFAULT NULL,
   `icon` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
