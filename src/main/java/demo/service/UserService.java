@@ -2,7 +2,6 @@ package demo.service;
 
 import demo.domain.User;
 import demo.mapper.UserMapper;
-import demo.utils.JwtUtil;
 import demo.vo.Result;
 import demo.vo.UserVO;
 import org.springframework.beans.BeanUtils;
@@ -15,11 +14,6 @@ public class UserService {
     @Resource
     private UserMapper userMapper;
 
-    @Resource
-    private JwtUtil jwtUtil;
-
-    @Resource
-
     public User getUserByUsername(String username) {
         return userMapper.getUserByUsername(username);
     }
@@ -31,16 +25,12 @@ public class UserService {
         if (user == null)
             ok = false;
 
-//        验证密码是否正确
-//        password = passwordEncoder.encode(password);
         if (!password.equals(userMapper.getPasswordByUsername(username)))
             ok = false;
 
         if (ok) {
             UserVO userVO = new UserVO();
             BeanUtils.copyProperties(user, userVO);
-            String token = jwtUtil.createToken(user.getUserId());
-            userVO.setToken(token);
 
             return Result.OK().data(userVO).build();
         }
@@ -60,10 +50,8 @@ public class UserService {
 
         if (insertRes == 0) return Result.BAD().data("注册失败").build();
 
-        String token = jwtUtil.createToken(user.getUserId());
         UserVO userVO = new UserVO();
         BeanUtils.copyProperties(user, userVO);
-        userVO.setToken(token);
         return Result.OK().data(userVO).build();
     }
 }
