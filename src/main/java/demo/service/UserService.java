@@ -25,7 +25,7 @@ public class UserService {
         if (user == null)
             ok = false;
 
-        if (!password.equals(userMapper.getPasswordByUsername(username)))
+        if (!password.equals(user.getPassword()))
             ok = false;
 
         if (ok) {
