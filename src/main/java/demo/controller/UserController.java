@@ -5,7 +5,6 @@ import demo.vo.Result;
 import demo.vo.UserVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,16 +34,6 @@ public class UserController {
         System.out.println("/userRegister");
         Result result = userService.userRegister(username, password);
         return result;
-    }
-
-    @GetMapping("/auth/test")
-    public Result test() {
-        return Result.OK().data("auth---test").build();
-    }
-
-    @GetMapping("/hello")
-    public Result hello() {
-        return Result.OK().data("hello").build();
     }
 
 }
