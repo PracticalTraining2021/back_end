@@ -51,8 +51,8 @@ public class CommentService {
 
     public Integer updateComment(String commentId, String content, Integer score) {
         if (score == null)
-            return commentMapper.updateComment(commentId, content);
-        return commentMapper.updateComment(commentId, content, score);
+            return commentMapper.updateComment1(commentId, content);
+        return commentMapper.updateComment2(commentId, content, score);
     }
 
     //    用户 点赞或取消点赞 评价

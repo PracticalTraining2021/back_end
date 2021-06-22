@@ -46,7 +46,7 @@ public class CommentController {
     }
 
     @ApiOperation("更改评价内容")
-    @PutMapping("/content")
+    @PostMapping("/content")
     public Result changeContent(@RequestParam(value = "commentId", required = true) String commentId,
                                 @RequestParam(value = "content", required = true) String content,
                                 @RequestParam(value = "score", required = false) Integer score,

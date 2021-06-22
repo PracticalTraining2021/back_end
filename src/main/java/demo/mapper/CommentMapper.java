@@ -27,10 +27,10 @@ public interface CommentMapper extends BaseMapper<Comment> {
     Integer decreLikesCountByCommentId(@Param("commentId") String commentId);
 
     @Update("update comment set content = #{content} where comment_id = #{commentId}")
-    Integer updateComment(@Param("commentId") String commentId, @Param("content") String content);
+    Integer updateComment1(@Param("commentId") String commentId, @Param("content") String content);
 
     @Update("update comment set content = #{content}, score = #{score} where comment_id = #{commentId}")
-    Integer updateComment(@Param("commentId") String commentId, @Param("content") String content, @Param("score") Integer score);
+    Integer updateComment2(@Param("commentId") String commentId, @Param("content") String content, @Param("score") Integer score);
 //  ================================================================================
 //    以下接口操作的是 user_likes_comment 表
 

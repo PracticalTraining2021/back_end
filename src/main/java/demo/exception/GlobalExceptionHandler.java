@@ -45,6 +45,14 @@ public class GlobalExceptionHandler {
         return ex.getErrorResult();
     }
 
+    @ExceptionHandler(Exception.class)
+    @ResponseBody
+    public Result expHandler(Exception e) {
+        logger.error(e.getMessage());
+
+        return Result.BAD().data(e.getMessage()).build();
+    }
+
     /**
      * 处理参数校验失败异常
      *
