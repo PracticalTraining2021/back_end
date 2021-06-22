@@ -1,0 +1,10 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    username: root
+    password:
+    url: jdbc:mysql://localhost:3306/taptap?serverTimezone=UTC&useUnicode=true&charactorEncoding=utf-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
