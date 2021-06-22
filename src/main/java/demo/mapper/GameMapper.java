@@ -21,7 +21,7 @@ public interface GameMapper extends BaseMapper<Game> {
     @Update("update game " +
             "set avg_score = #{avgScore}, comment_count = comment_count + 1 " +
             "where game_id = #{gameId}")
-    Integer computeAvgScore(@Param("gameId") String gameId, @Param("avgScore") Integer avgScore);
+    Integer computeAvgScore(@Param("gameId") String gameId, @Param("avgScore") double avgScore);
 
     @Update("update game set interest_count = interest_count + 1 where game_id = #{gameId}")
     Integer increInterestCount(@Param("gameId") String gameId);

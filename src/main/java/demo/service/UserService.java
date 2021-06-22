@@ -1,6 +1,10 @@
 package demo.service;
 
+import demo.domain.Game;
 import demo.domain.User;
+import demo.domain.UserLikesGame;
+import demo.mapper.GameMapper;
+import demo.mapper.UserLikesGameMapper;
 import demo.mapper.UserMapper;
 import demo.vo.Result;
 import demo.vo.UserVO;
@@ -8,11 +12,16 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class UserService {
     @Resource
     private UserMapper userMapper;
+    @Resource
+    private UserLikesGameMapper userLikesGameMapper;
+    @Resource
+    private GameMapper gameMapper;
 
     public User getUserByUsername(String username) {
         return userMapper.getUserByUsername(username);
@@ -25,6 +34,7 @@ public class UserService {
         if (user == null)
             ok = false;
 
+        assert user != null;
         if (!password.equals(user.getPassword()))
             ok = false;
 
@@ -53,5 +63,25 @@ public class UserService {
         UserVO userVO = new UserVO();
         BeanUtils.copyProperties(user, userVO);
         return Result.OK().data(userVO).build();
+    }
+
+    public Result getUserMessage(String userId) {
+        User user = userMapper.selectById(userId);
+        UserVO userVO = new UserVO();
+        BeanUtils.copyProperties(user, userVO);
+        return Result.OK().data(userVO).build();
+    }
+
+    public void userFollowGame(String userId, String gameId) throws Exception {
+        UserLikesGame userLikesGame = new UserLikesGame();
+        userLikesGame.setGameId(gameId);
+        userLikesGame.setUserId(userId);
+        int insertLine = userLikesGameMapper.insert(userLikesGame);
+        if (insertLine == 0) throw new Exception("你已关注");
+    }
+
+    public List<Game> getUserLikeGame(String userId) {
+        List<String> gameIdList = userLikesGameMapper.selectGameId(userId);
+        return gameMapper.selectBatchIds(gameIdList);
     }
 }

@@ -34,11 +34,11 @@ public class GameService {
     public Map computeAvgScore(String gameId, Integer addedScore) {
         Game game = gameMapper.selectById(gameId);
         Integer commentCount = game.getCommentCount();
-        Integer avgScore = game.getAvgScore();
+        double avgScore = game.getAvgScore();
         avgScore = (avgScore * commentCount + addedScore) / (commentCount + 1);
         Integer computeRes = gameMapper.computeAvgScore(gameId, avgScore);
 
-        Map<String, Integer> result = new HashMap<>();
+        Map<String, Number> result = new HashMap<>();
         result.put("avg_score", avgScore);
         result.put("comment_count", commentCount + 1);
         return result;

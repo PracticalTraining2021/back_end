@@ -2,34 +2,128 @@ package demo.domain;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-@Data
-@ApiModel("游戏实体")
-public class Game {
+import java.io.Serializable;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@TableName("game")
+@ToString
+@Builder
+public class Game implements Serializable {
     @TableId(type = IdType.ASSIGN_ID)
-    @ApiModelProperty("游戏ID")
     private String gameId;
-    @ApiModelProperty("名称")
     private String name;
-    @ApiModelProperty("下载包大小")
-    private String size;
-    @ApiModelProperty("发行商")
+    private int size;
     private String issuer;
-    @ApiModelProperty("下载量")
-    private Integer downloads;
-    @ApiModelProperty("平均评分")
-    private Integer avgScore;
-    @ApiModelProperty("评价人数")
-    private Integer commentCount;
-    @ApiModelProperty("关注量")
-    private Integer interestCount;
-    @ApiModelProperty("图标路径")
+    private int downloads;
+    private double avgScore;
+    private int scoredCount;
+    private int commentCount;
+    private int interestCount;
+
     private String icon;
-    @ApiModelProperty("展示图文件路径")
     private String displayDrawings;
-    @ApiModelProperty("简介")
     private String briefIntro;
+
+    public String getGameId() {
+        return gameId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setGameId(String gameId) {
+        this.gameId = gameId;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getAvgScore() {
+        return avgScore;
+    }
+
+    public int getCommentCount() {
+        return commentCount;
+    }
+
+    public int getDownloads() {
+        return downloads;
+    }
+
+    public int getInterestCount() {
+        return interestCount;
+    }
+
+    public int getScoredCount() {
+        return scoredCount;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public String getBriefIntro() {
+        return briefIntro;
+    }
+
+    public String getDisplayDrawings() {
+        return displayDrawings;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public String getIssuer() {
+        return issuer;
+    }
+
+    public void setAvgScore(double avgScore) {
+        this.avgScore = avgScore;
+    }
+
+    public void setBriefIntro(String briefIntro) {
+        this.briefIntro = briefIntro;
+    }
+
+    public void setCommentCount(int commentCount) {
+        this.commentCount = commentCount;
+    }
+
+    public void setDisplayDrawings(String displayDrawings) {
+        this.displayDrawings = displayDrawings;
+    }
+
+    public void setDownloads(int downloads) {
+        this.downloads = downloads;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
+    public void setInterestCount(int interestCount) {
+        this.interestCount = interestCount;
+    }
+
+    public void setIssuer(String issuer) {
+        this.issuer = issuer;
+    }
+
+    public void setScoredCount(int scoredCount) {
+        this.scoredCount = scoredCount;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
 }

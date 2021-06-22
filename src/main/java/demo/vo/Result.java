@@ -1,8 +1,5 @@
 package demo.vo;
 
-import io.swagger.annotations.ApiModel;
-
-@ApiModel("接口返回结果")
 public class Result {
     private int status;
     private String msg;
