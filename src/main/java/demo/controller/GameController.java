@@ -2,6 +2,8 @@ package demo.controller;
 
 import demo.domain.Game;
 import demo.domain.UserLikesGame;
+import demo.exception.BusinessException;
+import demo.exception.ErrorCode;
 import demo.service.GameService;
 import demo.vo.Result;
 import io.swagger.annotations.Api;
@@ -49,7 +51,7 @@ public class GameController {
     public Result handleUserFollows(@RequestParam(value = "gameId", required = true) String gameId, HttpSession session) {
         String userId = (String) session.getAttribute("user");
         if (StringUtils.isEmpty(userId))
-            return Result.BAD().data("用户未登录").build();
+            throw new BusinessException(ErrorCode.BAD_REQUEST_COMMON, "用户未登录");
 
         UserLikesGame ulg = new UserLikesGame(gameId, userId);
         Result result = gameService.handleUserLikesGame(ulg);

@@ -49,6 +49,12 @@ public class CommentService {
         return Result.OK().data(comment).build();
     }
 
+    public Integer updateComment(String commentId, String content, Integer score) {
+        if (score == null)
+            return commentMapper.updateComment(commentId, content);
+        return commentMapper.updateComment(commentId, content, score);
+    }
+
     //    用户 点赞或取消点赞 评价
     public Result handleUserLikesComment(UserLikesComment ulc) {
         boolean isExist = commentMapper.getCountByUlc(ulc) == 1;
