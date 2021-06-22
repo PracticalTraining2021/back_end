@@ -13,13 +13,13 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
-@Api("用户相关接口")
+@Api(tags = {"用户相关接口"})
 public class UserController {
 
     @Resource
     private UserService userService;
 
-    @PostMapping("/userLogin")
+    @PostMapping("userLogin")
     @ApiOperation("用户登录")
     public Result userLogin(@RequestParam("username") String username, @RequestParam("password") String password, HttpServletRequest request) {
         System.out.println("/userLogin");

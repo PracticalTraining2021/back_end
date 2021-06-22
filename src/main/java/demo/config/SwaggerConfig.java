@@ -25,7 +25,7 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("springboot swagger整合") //文档标题
+                .title("前端请求接口") //文档标题
                 .version("1.0") //版本号
                 .description("相关接口")//接口概述
                 .build();
