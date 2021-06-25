@@ -69,8 +69,8 @@ public class GameService {
         }
     }
 
-//    TODO: 获取游戏图标
-
-//    TODO: 获取展示图
+    public Integer insertGame(Game game) {
+        return gameMapper.insert(game);
+    }
 
 }

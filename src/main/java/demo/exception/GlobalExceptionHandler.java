@@ -107,7 +107,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({HttpMessageNotReadableException.class})
     @ResponseBody
     public Result resolveHttpMessageNotReadableException(HttpMessageNotReadableException ex) {
-        return Result.BAD().data("缺少请求体").build();
+        return Result.BAD().data(ex.getHttpInputMessage()).build();
     }
 
     /**

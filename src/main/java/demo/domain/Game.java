@@ -23,7 +23,6 @@ public class Game implements Serializable {
     private String issuer;
     private int downloads;
     private double avgScore;
-    private int scoredCount;
     private int commentCount;
     private int interestCount;
 
@@ -63,9 +62,6 @@ public class Game implements Serializable {
         return interestCount;
     }
 
-    public int getScoredCount() {
-        return scoredCount;
-    }
 
     public int getSize() {
         return size;
@@ -119,9 +115,6 @@ public class Game implements Serializable {
         this.issuer = issuer;
     }
 
-    public void setScoredCount(int scoredCount) {
-        this.scoredCount = scoredCount;
-    }
 
     public void setSize(int size) {
         this.size = size;

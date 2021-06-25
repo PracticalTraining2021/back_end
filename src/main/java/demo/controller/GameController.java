@@ -58,8 +58,9 @@ public class GameController {
         return result;
     }
 
-    @GetMapping("/test")
-    public Result test() {
-        return Result.OK().data("/game/test").build();
+    @PostMapping("/addGame")
+    public Result insertGame(@RequestBody Game game) {
+        gameService.insertGame(game);
+        return Result.OK().data("添加游戏成功").build();
     }
 }

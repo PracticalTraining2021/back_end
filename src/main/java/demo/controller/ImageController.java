@@ -1,11 +1,8 @@
 package demo.controller;
 
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -13,9 +10,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-@Api(tags = {"图片上传或下载接口"})
-@RestController
-@RequestMapping("/image")
+//@Api(tags = {"图片上传或下载接口"})
+//@RestController
+//@RequestMapping("/image")
 public class ImageController {
 
     private String prefix = "images/";
