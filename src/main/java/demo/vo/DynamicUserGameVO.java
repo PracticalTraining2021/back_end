@@ -34,6 +34,8 @@ public class DynamicUserGameVO implements Serializable {
 
     private int isLike;
 
+    private int isCollect;
+
     public void setTitle(String title) {
         this.title = title;
     }
@@ -120,5 +122,13 @@ public class DynamicUserGameVO implements Serializable {
 
     public void setIsLike(int isLike) {
         this.isLike = isLike;
+    }
+
+    public int getIsCollect() {
+        return isCollect;
+    }
+
+    public void setIsCollect(int isCollect) {
+        this.isCollect = isCollect;
     }
 }

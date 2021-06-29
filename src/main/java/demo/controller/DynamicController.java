@@ -84,4 +84,20 @@ public class DynamicController {
         return Result.OK().data(dynamicService.getDynamicById(dynamicId,userId)).build();
     }
 
+    @PostMapping("/favouritesDynamic")
+    @ApiOperation("收藏动态")
+    public Result favouritesDynamic(@RequestParam("dynamicId") String dynamicId,HttpServletRequest request) throws Exception {
+        String userId = request.getSession().getAttribute("user").toString();
+        dynamicService.favoritesDynamic(userId,dynamicId);
+        return Result.OK().build();
+    }
+
+    @PostMapping("/cancelFavouritesDynamic")
+    @ApiOperation("取消收藏")
+    public Result cancelFavouritesDynamic(@RequestParam("dynamicId") String dynamicId,HttpServletRequest request) throws Exception {
+        String userId = request.getSession().getAttribute("user").toString();
+        dynamicService.deleteFavouritesDynamic(userId,dynamicId);
+        return Result.OK().build();
+    }
+
 }

@@ -1,14 +1,8 @@
 package demo.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import demo.domain.Dynamic;
-import demo.domain.Game;
-import demo.domain.User;
-import demo.domain.UserLikesDynamic;
-import demo.mapper.DynamicMapper;
-import demo.mapper.GameMapper;
-import demo.mapper.UserLikesDynamicMapper;
-import demo.mapper.UserMapper;
+import demo.domain.*;
+import demo.mapper.*;
 import demo.vo.DynamicUserGameVO;
 import demo.vo.DynamicVO;
 import org.slf4j.Logger;
@@ -37,6 +31,8 @@ public class DynamicService {
 
     @Resource
     private UserLikesDynamicMapper userLikesDynamicMapper;
+    @Resource
+    private UserCollectDynamicMapper userCollectDynamicMapper;
 
     public void createDynamic(DynamicVO dynamicVO, String userId) {
         Dynamic dynamic = new Dynamic();
@@ -60,6 +56,7 @@ public class DynamicService {
             dynamicUserGameVO.setGame(game);
             dynamicUserGameVO.setUser(user);
             dynamicUserGameVO.setIsLike(UserIsLike(userId,i.getDynamicId()));
+            dynamicUserGameVO.setIsCollect(UserIsCollect(userId,i.getDynamicId()));
             transferList.add(dynamicUserGameVO);
         }
         return transferList;
@@ -129,6 +126,27 @@ public class DynamicService {
         return transferDynamic(list,userId);
     }
 
+    public void favoritesDynamic(String userId,String dynamicId) throws Exception {
+        if(UserIsCollect(userId,dynamicId)==0) {
+            UserCollectDynamic userCollectDynamic = new UserCollectDynamic();
+            userCollectDynamic.setDynamicId(dynamicId);
+            userCollectDynamic.setUserId(userId);
+            userCollectDynamicMapper.insert(userCollectDynamic);
+        }
+        else {
+            throw  new Exception("已收藏");
+        }
+    }
+
+    public void deleteFavouritesDynamic(String userId,String dynamicId) throws Exception {
+        if(UserIsCollect(userId,dynamicId)==1) {
+            userCollectDynamicMapper.delete(new QueryWrapper<UserCollectDynamic>().eq("user_id",userId).eq("dynamic_id",dynamicId));
+        }
+        else {
+            throw  new Exception("没有收藏");
+        }
+    }
+
     private int UserIsLike(String userId,String dynamicId)
     {
         if(null == userLikesDynamicMapper.selectOne(new QueryWrapper<UserLikesDynamic>().eq("user_id", userId).eq("dynamic_id", dynamicId)))
@@ -138,5 +156,12 @@ public class DynamicService {
         else return 1;
     }
 
-
+    private int UserIsCollect(String userId,String dynamicId)
+    {
+        if(null == userCollectDynamicMapper.selectOne(new QueryWrapper<UserCollectDynamic>().eq("user_id", userId).eq("dynamic_id", dynamicId)))
+        {
+            return 0;
+        }
+        else return 1;
+    }
 }
