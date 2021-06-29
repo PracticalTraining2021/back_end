@@ -1,0 +1,16 @@
+server:
+  port: 8888
+
+spring:
+  datasource:
+    username: root
+    password:
+    url: jdbc:mysql://localhost:3306/taptap?serverTimezone=UTC&useUnicode=true&charactorEncoding=utf-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  typeAliasesPackage: demo.domain.*
+
+logging:
+  file: log/pc_5.log

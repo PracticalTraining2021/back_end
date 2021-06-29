@@ -2,9 +2,14 @@ package demo.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import demo.domain.Dynamic;
+import demo.domain.Game;
+import demo.domain.User;
 import demo.domain.UserLikesDynamic;
 import demo.mapper.DynamicMapper;
+import demo.mapper.GameMapper;
 import demo.mapper.UserLikesDynamicMapper;
+import demo.mapper.UserMapper;
+import demo.vo.DynamicUserGameVO;
 import demo.vo.DynamicVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +17,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
@@ -24,6 +30,10 @@ public class DynamicService {
 
     @Resource
     private DynamicMapper dynamicMapper;
+    @Resource
+    private GameMapper gameMapper;
+    @Resource
+    private UserMapper userMapper;
 
     @Resource
     private UserLikesDynamicMapper userLikesDynamicMapper;
@@ -37,8 +47,25 @@ public class DynamicService {
         dynamicMapper.insert(dynamic);
     }
 
+    private List<DynamicUserGameVO> transferDynamic(List<Dynamic> list)
+    {
+        List<DynamicUserGameVO> transferList=new ArrayList<>();
+        for(Dynamic i: list)
+        {
+            DynamicUserGameVO dynamicUserGameVO=new DynamicUserGameVO();
+            User user=userMapper.selectById(i.getUserId());
+            Game game=gameMapper.selectById(i.getGameId());
+            user.setPassword("***");
+            BeanUtils.copyProperties(i, dynamicUserGameVO);
+            dynamicUserGameVO.setGame(game);
+            dynamicUserGameVO.setUser(user);
+            transferList.add(dynamicUserGameVO);
+        }
+        return transferList;
+    }
 
-    public List<Dynamic> selectAllDynamic() {
+
+    public List<DynamicUserGameVO> selectAllDynamic() {
         List<Dynamic> list = dynamicMapper.selectList(new QueryWrapper<Dynamic>());
         list.sort(new Comparator<Dynamic>() {
             @Override
@@ -46,11 +73,11 @@ public class DynamicService {
                 return o2.getPublishAt().compareTo(o1.getPublishAt());
             }
         });
-        return list;
+        return transferDynamic(list);
     }
 
-    public List<Dynamic> getUserDynamic(String userId) {
-        return dynamicMapper.selectList(new QueryWrapper<Dynamic>().eq("user_id", userId));
+    public List<DynamicUserGameVO> getUserDynamic(String userId) {
+        return transferDynamic(dynamicMapper.selectList(new QueryWrapper<Dynamic>().eq("user_id", userId)));
     }
 
     public void updateUserDynamic(String userId, String dynamicId, String content) throws Exception {
@@ -68,7 +95,7 @@ public class DynamicService {
         dynamicMapper.delete(new QueryWrapper<Dynamic>().eq("dynamic_id", dynamicId));
     }
 
-    public List<Dynamic> findDynamicByGameId(String gameId) {
+    public List<DynamicUserGameVO> findDynamicByGameId(String gameId) {
         List<Dynamic> list = dynamicMapper.selectList(new QueryWrapper<Dynamic>().eq("game_id", gameId));
         list.sort(new Comparator<Dynamic>() {
             @Override
@@ -76,7 +103,7 @@ public class DynamicService {
                 return o2.getPublishAt().compareTo(o1.getPublishAt());
             }
         });
-        return list;
+        return transferDynamic(list);
     }
 
     public void giveDynamicLikes(String userId, String dynamicId) throws Exception {

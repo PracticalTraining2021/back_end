@@ -27,6 +27,8 @@ public class Dynamic implements Serializable {
 
     private String content;
 
+    private String title;
+
     private String imgUrls;
 
     private int likesCount;
@@ -87,5 +89,13 @@ public class Dynamic implements Serializable {
 
     public int getLikesCount() {
         return likesCount;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getTitle() {
+        return title;
     }
 }

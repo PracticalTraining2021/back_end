@@ -17,6 +17,8 @@ public class DynamicVO implements Serializable {
 
     private String imgUrls;
 
+    private String title;
+
     public void setImgUrls(String imgUrls) {
         this.imgUrls = imgUrls;
     }
@@ -39,5 +41,13 @@ public class DynamicVO implements Serializable {
 
     public String getContent() {
         return content;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

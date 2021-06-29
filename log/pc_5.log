@@ -1,0 +1,205 @@
+2021-06-29 16:14:40.773  INFO 5700 --- [main] demo.Application                         : Starting Application on DESKTOP-R727CR4 with PID 5700 (started by cf in C:\Users\cf\Desktop\编码\Java\back_end)
+2021-06-29 16:14:40.781  INFO 5700 --- [main] demo.Application                         : The following profiles are active: cfdev
+2021-06-29 16:14:41.952  INFO 5700 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-29 16:14:42.182  INFO 5700 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
+2021-06-29 16:14:42.198  INFO 5700 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-06-29 16:14:42.198  INFO 5700 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.29]
+2021-06-29 16:14:42.267  INFO 5700 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-06-29 16:14:42.267  INFO 5700 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1385 ms
+2021-06-29 16:14:43.187  WARN 5700 --- [main] c.b.m.core.metadata.TableInfoHelper      : Warn: Could not find @TableId in Class: demo.domain.UserLikesDynamic.
+2021-06-29 16:14:43.225  WARN 5700 --- [main] c.b.m.core.metadata.TableInfoHelper      : Warn: Could not find @TableId in Class: demo.domain.UserLikesGame.
+2021-06-29 16:14:43.526  INFO 5700 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2021-06-29 16:14:43.610  INFO 5700 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-06-29 16:14:43.789  INFO 5700 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2021-06-29 16:14:43.811  INFO 5700 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2021-06-29 16:14:43.842  INFO 5700 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2021-06-29 16:14:44.096  INFO 5700 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
+2021-06-29 16:14:44.096  INFO 5700 --- [main] demo.Application                         : Started Application in 4.167 seconds (JVM running for 5.934)
+2021-06-29 16:18:01.743  INFO 2724 --- [main] demo.Application                         : Starting Application on DESKTOP-R727CR4 with PID 2724 (started by cf in C:\Users\cf\Desktop\编码\Java\back_end)
+2021-06-29 16:18:01.759  INFO 2724 --- [main] demo.Application                         : The following profiles are active: cfdev
+2021-06-29 16:18:03.326  INFO 2724 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-29 16:18:03.634  INFO 2724 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
+2021-06-29 16:18:03.643  INFO 2724 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-06-29 16:18:03.643  INFO 2724 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.29]
+2021-06-29 16:18:03.727  INFO 2724 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-06-29 16:18:03.727  INFO 2724 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1873 ms
+2021-06-29 16:18:04.675  WARN 2724 --- [main] c.b.m.core.metadata.TableInfoHelper      : Warn: Could not find @TableId in Class: demo.domain.UserLikesDynamic.
+2021-06-29 16:18:04.718  WARN 2724 --- [main] c.b.m.core.metadata.TableInfoHelper      : Warn: Could not find @TableId in Class: demo.domain.UserLikesGame.
+2021-06-29 16:18:05.079  INFO 2724 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2021-06-29 16:18:05.171  INFO 2724 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-06-29 16:18:05.343  INFO 2724 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2021-06-29 16:18:05.362  INFO 2724 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2021-06-29 16:18:05.391  INFO 2724 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2021-06-29 16:18:05.620  INFO 2724 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
+2021-06-29 16:18:05.623  INFO 2724 --- [main] demo.Application                         : Started Application in 4.554 seconds (JVM running for 5.423)
+2021-06-29 16:18:22.503  INFO 2724 --- [http-nio-8888-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-06-29 16:18:22.503  INFO 2724 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-06-29 16:18:22.511  INFO 2724 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 7 ms
+2021-06-29 16:18:30.681  INFO 2724 --- [http-nio-8888-exec-10] demo.utils.ControllerLogger              : ===========================================
+2021-06-29 16:18:30.681  INFO 2724 --- [http-nio-8888-exec-10] demo.utils.ControllerLogger              : URI : /createDynamic
+2021-06-29 16:18:30.682  INFO 2724 --- [http-nio-8888-exec-10] demo.utils.ControllerLogger              : HTTP_METHOD : POST
+2021-06-29 16:18:30.682  INFO 2724 --- [http-nio-8888-exec-10] demo.utils.ControllerLogger              : IP : 0:0:0:0:0:0:0:1
+2021-06-29 16:18:30.684  INFO 2724 --- [http-nio-8888-exec-10] demo.utils.ControllerLogger              : CLASS_METHOD : demo.controller.DynamicController.createDynamic
+2021-06-29 16:18:30.684  INFO 2724 --- [http-nio-8888-exec-10] demo.utils.ControllerLogger              : ARGS : [DynamicVO(gameId=string, content=string, imgUrls=string, title=string), org.apache.catalina.connector.RequestFacade@43205891]
+2021-06-29 16:18:30.694 ERROR 2724 --- [http-nio-8888-exec-10] demo.exception.GlobalExceptionHandler    : null
+2021-06-29 16:19:29.564  INFO 2724 --- [http-nio-8888-exec-8] demo.utils.ControllerLogger              : ===========================================
+2021-06-29 16:19:29.564  INFO 2724 --- [http-nio-8888-exec-8] demo.utils.ControllerLogger              : URI : /createDynamic
+2021-06-29 16:19:29.565  INFO 2724 --- [http-nio-8888-exec-8] demo.utils.ControllerLogger              : HTTP_METHOD : POST
+2021-06-29 16:19:29.565  INFO 2724 --- [http-nio-8888-exec-8] demo.utils.ControllerLogger              : IP : 0:0:0:0:0:0:0:1
+2021-06-29 16:19:29.565  INFO 2724 --- [http-nio-8888-exec-8] demo.utils.ControllerLogger              : CLASS_METHOD : demo.controller.DynamicController.createDynamic
+2021-06-29 16:19:29.565  INFO 2724 --- [http-nio-8888-exec-8] demo.utils.ControllerLogger              : ARGS : [DynamicVO(gameId=string, content=string, imgUrls=string, title=string), org.apache.catalina.connector.RequestFacade@43205891]
+2021-06-29 16:19:29.565 ERROR 2724 --- [http-nio-8888-exec-8] demo.exception.GlobalExceptionHandler    : null
+2021-06-29 16:22:21.604  INFO 15148 --- [main] demo.Application                         : Starting Application on DESKTOP-R727CR4 with PID 15148 (started by cf in C:\Users\cf\Desktop\编码\Java\back_end)
+2021-06-29 16:22:21.619  INFO 15148 --- [main] demo.Application                         : The following profiles are active: cfdev
+2021-06-29 16:22:22.650  INFO 15148 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-29 16:22:22.885  INFO 15148 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
+2021-06-29 16:22:22.900  INFO 15148 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-06-29 16:22:22.900  INFO 15148 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.29]
+2021-06-29 16:22:22.963  INFO 15148 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-06-29 16:22:22.963  INFO 15148 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1297 ms
+2021-06-29 16:22:23.759  WARN 15148 --- [main] c.b.m.core.metadata.TableInfoHelper      : Warn: Could not find @TableId in Class: demo.domain.UserLikesDynamic.
+2021-06-29 16:22:23.806  WARN 15148 --- [main] c.b.m.core.metadata.TableInfoHelper      : Warn: Could not find @TableId in Class: demo.domain.UserLikesGame.
+2021-06-29 16:22:24.072  INFO 15148 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2021-06-29 16:22:24.150  INFO 15148 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-06-29 16:22:24.291  INFO 15148 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2021-06-29 16:22:24.306  INFO 15148 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2021-06-29 16:22:24.337  INFO 15148 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2021-06-29 16:22:24.540  INFO 15148 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
+2021-06-29 16:22:24.540  INFO 15148 --- [main] demo.Application                         : Started Application in 3.317 seconds (JVM running for 4.064)
+2021-06-29 16:22:40.963  INFO 15148 --- [http-nio-8888-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-06-29 16:22:40.963  INFO 15148 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-06-29 16:22:40.969  INFO 15148 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 6 ms
+2021-06-29 16:22:40.990  INFO 15148 --- [http-nio-8888-exec-1] demo.utils.ControllerLogger              : ===========================================
+2021-06-29 16:22:40.990  INFO 15148 --- [http-nio-8888-exec-1] demo.utils.ControllerLogger              : URI : /userLogin
+2021-06-29 16:22:40.990  INFO 15148 --- [http-nio-8888-exec-1] demo.utils.ControllerLogger              : HTTP_METHOD : POST
+2021-06-29 16:22:40.990  INFO 15148 --- [http-nio-8888-exec-1] demo.utils.ControllerLogger              : IP : 0:0:0:0:0:0:0:1
+2021-06-29 16:22:40.991  INFO 15148 --- [http-nio-8888-exec-1] demo.utils.ControllerLogger              : CLASS_METHOD : demo.controller.UserController.userLogin
+2021-06-29 16:22:40.992  INFO 15148 --- [http-nio-8888-exec-1] demo.utils.ControllerLogger              : ARGS : [cf, 123, org.apache.catalina.connector.RequestFacade@5f217f97]
+2021-06-29 16:22:41.030  INFO 15148 --- [http-nio-8888-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-06-29 16:22:41.638  INFO 15148 --- [http-nio-8888-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-06-29 16:22:47.626  INFO 15148 --- [http-nio-8888-exec-7] demo.utils.ControllerLogger              : ===========================================
+2021-06-29 16:22:47.627  INFO 15148 --- [http-nio-8888-exec-7] demo.utils.ControllerLogger              : URI : /createDynamic
+2021-06-29 16:22:47.627  INFO 15148 --- [http-nio-8888-exec-7] demo.utils.ControllerLogger              : HTTP_METHOD : POST
+2021-06-29 16:22:47.627  INFO 15148 --- [http-nio-8888-exec-7] demo.utils.ControllerLogger              : IP : 0:0:0:0:0:0:0:1
+2021-06-29 16:22:47.627  INFO 15148 --- [http-nio-8888-exec-7] demo.utils.ControllerLogger              : CLASS_METHOD : demo.controller.DynamicController.createDynamic
+2021-06-29 16:22:47.627  INFO 15148 --- [http-nio-8888-exec-7] demo.utils.ControllerLogger              : ARGS : [DynamicVO(gameId=string, content=string, imgUrls=string, title=string), org.apache.catalina.connector.RequestFacade@5f217f97]
+2021-06-29 16:25:14.488  INFO 13664 --- [main] demo.Application                         : Starting Application on DESKTOP-R727CR4 with PID 13664 (started by cf in C:\Users\cf\Desktop\编码\Java\back_end)
+2021-06-29 16:25:14.488  INFO 13664 --- [main] demo.Application                         : The following profiles are active: cfdev
+2021-06-29 16:25:15.613  INFO 13664 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-29 16:25:15.848  INFO 13664 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
+2021-06-29 16:25:15.863  INFO 13664 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-06-29 16:25:15.863  INFO 13664 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.29]
+2021-06-29 16:25:15.926  INFO 13664 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-06-29 16:25:15.926  INFO 13664 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1375 ms
+2021-06-29 16:25:16.787  WARN 13664 --- [main] c.b.m.core.metadata.TableInfoHelper      : Warn: Could not find @TableId in Class: demo.domain.UserLikesDynamic.
+2021-06-29 16:25:16.846  WARN 13664 --- [main] c.b.m.core.metadata.TableInfoHelper      : Warn: Could not find @TableId in Class: demo.domain.UserLikesGame.
+2021-06-29 16:25:17.133  INFO 13664 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2021-06-29 16:25:17.227  INFO 13664 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-06-29 16:25:17.411  INFO 13664 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2021-06-29 16:25:17.425  INFO 13664 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2021-06-29 16:25:17.439  INFO 13664 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2021-06-29 16:25:17.677  INFO 13664 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
+2021-06-29 16:25:17.680  INFO 13664 --- [main] demo.Application                         : Started Application in 3.532 seconds (JVM running for 4.281)
+2021-06-29 16:25:26.199  INFO 13664 --- [http-nio-8888-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-06-29 16:25:26.200  INFO 13664 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-06-29 16:25:26.205  INFO 13664 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 5 ms
+2021-06-29 16:25:26.230  INFO 13664 --- [http-nio-8888-exec-1] demo.utils.ControllerLogger              : ===========================================
+2021-06-29 16:25:26.230  INFO 13664 --- [http-nio-8888-exec-1] demo.utils.ControllerLogger              : URI : /userLogin
+2021-06-29 16:25:26.230  INFO 13664 --- [http-nio-8888-exec-1] demo.utils.ControllerLogger              : HTTP_METHOD : POST
+2021-06-29 16:25:26.230  INFO 13664 --- [http-nio-8888-exec-1] demo.utils.ControllerLogger              : IP : 0:0:0:0:0:0:0:1
+2021-06-29 16:25:26.232  INFO 13664 --- [http-nio-8888-exec-1] demo.utils.ControllerLogger              : CLASS_METHOD : demo.controller.UserController.userLogin
+2021-06-29 16:25:26.232  INFO 13664 --- [http-nio-8888-exec-1] demo.utils.ControllerLogger              : ARGS : [cf, 123, org.apache.catalina.connector.RequestFacade@5e99d62]
+2021-06-29 16:25:26.250  INFO 13664 --- [http-nio-8888-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-06-29 16:25:26.780  INFO 13664 --- [http-nio-8888-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-06-29 16:25:33.479  INFO 13664 --- [http-nio-8888-exec-2] demo.utils.ControllerLogger              : ===========================================
+2021-06-29 16:25:33.480  INFO 13664 --- [http-nio-8888-exec-2] demo.utils.ControllerLogger              : URI : /getAllDynamic
+2021-06-29 16:25:33.480  INFO 13664 --- [http-nio-8888-exec-2] demo.utils.ControllerLogger              : HTTP_METHOD : GET
+2021-06-29 16:25:33.480  INFO 13664 --- [http-nio-8888-exec-2] demo.utils.ControllerLogger              : IP : 0:0:0:0:0:0:0:1
+2021-06-29 16:25:33.480  INFO 13664 --- [http-nio-8888-exec-2] demo.utils.ControllerLogger              : CLASS_METHOD : demo.controller.DynamicController.getAllDynamic
+2021-06-29 16:25:33.480  INFO 13664 --- [http-nio-8888-exec-2] demo.utils.ControllerLogger              : ARGS : []
+2021-06-29 16:38:25.675  INFO 736 --- [main] demo.Application                         : Starting Application on DESKTOP-R727CR4 with PID 736 (started by cf in C:\Users\cf\Desktop\编码\Java\back_end)
+2021-06-29 16:38:25.691  INFO 736 --- [main] demo.Application                         : The following profiles are active: cfdev
+2021-06-29 16:38:26.706  INFO 736 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-29 16:38:26.941  INFO 736 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
+2021-06-29 16:38:26.956  INFO 736 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-06-29 16:38:26.956  INFO 736 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.29]
+2021-06-29 16:38:27.019  INFO 736 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-06-29 16:38:27.019  INFO 736 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1281 ms
+2021-06-29 16:38:27.847  WARN 736 --- [main] c.b.m.core.metadata.TableInfoHelper      : Warn: Could not find @TableId in Class: demo.domain.UserLikesDynamic.
+2021-06-29 16:38:27.878  WARN 736 --- [main] c.b.m.core.metadata.TableInfoHelper      : Warn: Could not find @TableId in Class: demo.domain.UserLikesGame.
+2021-06-29 16:38:28.143  INFO 736 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2021-06-29 16:38:28.222  INFO 736 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-06-29 16:38:28.362  INFO 736 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2021-06-29 16:38:28.378  INFO 736 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2021-06-29 16:38:28.393  INFO 736 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2021-06-29 16:38:28.612  INFO 736 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
+2021-06-29 16:38:28.612  INFO 736 --- [main] demo.Application                         : Started Application in 3.332 seconds (JVM running for 4.223)
+2021-06-29 16:38:35.015  INFO 736 --- [http-nio-8888-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-06-29 16:38:35.015  INFO 736 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-06-29 16:38:35.022  INFO 736 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 7 ms
+2021-06-29 16:38:55.629  INFO 736 --- [http-nio-8888-exec-1] demo.utils.ControllerLogger              : ===========================================
+2021-06-29 16:38:55.630  INFO 736 --- [http-nio-8888-exec-1] demo.utils.ControllerLogger              : URI : /userLogin
+2021-06-29 16:38:55.630  INFO 736 --- [http-nio-8888-exec-1] demo.utils.ControllerLogger              : HTTP_METHOD : POST
+2021-06-29 16:38:55.630  INFO 736 --- [http-nio-8888-exec-1] demo.utils.ControllerLogger              : IP : 0:0:0:0:0:0:0:1
+2021-06-29 16:38:55.633  INFO 736 --- [http-nio-8888-exec-1] demo.utils.ControllerLogger              : CLASS_METHOD : demo.controller.UserController.userLogin
+2021-06-29 16:38:55.633  INFO 736 --- [http-nio-8888-exec-1] demo.utils.ControllerLogger              : ARGS : [cf, 123, org.apache.catalina.connector.RequestFacade@5d0bdfa9]
+2021-06-29 16:38:55.653  INFO 736 --- [http-nio-8888-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-06-29 16:38:56.159  INFO 736 --- [http-nio-8888-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-06-29 16:39:10.118  INFO 736 --- [http-nio-8888-exec-2] demo.utils.ControllerLogger              : ===========================================
+2021-06-29 16:39:10.118  INFO 736 --- [http-nio-8888-exec-2] demo.utils.ControllerLogger              : URI : /getAllDynamic
+2021-06-29 16:39:10.119  INFO 736 --- [http-nio-8888-exec-2] demo.utils.ControllerLogger              : HTTP_METHOD : GET
+2021-06-29 16:39:10.119  INFO 736 --- [http-nio-8888-exec-2] demo.utils.ControllerLogger              : IP : 0:0:0:0:0:0:0:1
+2021-06-29 16:39:10.119  INFO 736 --- [http-nio-8888-exec-2] demo.utils.ControllerLogger              : CLASS_METHOD : demo.controller.DynamicController.getAllDynamic
+2021-06-29 16:39:10.119  INFO 736 --- [http-nio-8888-exec-2] demo.utils.ControllerLogger              : ARGS : []
+2021-06-29 16:39:51.534  INFO 10616 --- [main] demo.Application                         : Starting Application on DESKTOP-R727CR4 with PID 10616 (started by cf in C:\Users\cf\Desktop\编码\Java\back_end)
+2021-06-29 16:39:51.534  INFO 10616 --- [main] demo.Application                         : The following profiles are active: cfdev
+2021-06-29 16:39:52.581  INFO 10616 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-29 16:39:52.815  INFO 10616 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
+2021-06-29 16:39:52.831  INFO 10616 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-06-29 16:39:52.831  INFO 10616 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.29]
+2021-06-29 16:39:52.894  INFO 10616 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-06-29 16:39:52.894  INFO 10616 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1297 ms
+2021-06-29 16:39:53.721  WARN 10616 --- [main] c.b.m.core.metadata.TableInfoHelper      : Warn: Could not find @TableId in Class: demo.domain.UserLikesDynamic.
+2021-06-29 16:39:53.753  WARN 10616 --- [main] c.b.m.core.metadata.TableInfoHelper      : Warn: Could not find @TableId in Class: demo.domain.UserLikesGame.
+2021-06-29 16:39:54.018  INFO 10616 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2021-06-29 16:39:54.112  INFO 10616 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-06-29 16:39:54.253  INFO 10616 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2021-06-29 16:39:54.253  INFO 10616 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2021-06-29 16:39:54.284  INFO 10616 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2021-06-29 16:39:54.503  INFO 10616 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
+2021-06-29 16:39:54.503  INFO 10616 --- [main] demo.Application                         : Started Application in 3.325 seconds (JVM running for 4.14)
+2021-06-29 16:39:57.878  INFO 10616 --- [http-nio-8888-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-06-29 16:39:57.878  INFO 10616 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-06-29 16:39:57.883  INFO 10616 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 5 ms
+2021-06-29 16:40:08.085  INFO 10616 --- [http-nio-8888-exec-1] demo.utils.ControllerLogger              : ===========================================
+2021-06-29 16:40:08.085  INFO 10616 --- [http-nio-8888-exec-1] demo.utils.ControllerLogger              : URI : /userLogin
+2021-06-29 16:40:08.087  INFO 10616 --- [http-nio-8888-exec-1] demo.utils.ControllerLogger              : HTTP_METHOD : POST
+2021-06-29 16:40:08.087  INFO 10616 --- [http-nio-8888-exec-1] demo.utils.ControllerLogger              : IP : 0:0:0:0:0:0:0:1
+2021-06-29 16:40:08.089  INFO 10616 --- [http-nio-8888-exec-1] demo.utils.ControllerLogger              : CLASS_METHOD : demo.controller.UserController.userLogin
+2021-06-29 16:40:08.089  INFO 10616 --- [http-nio-8888-exec-1] demo.utils.ControllerLogger              : ARGS : [cf, 123, org.apache.catalina.connector.RequestFacade@70fc471c]
+2021-06-29 16:40:08.110  INFO 10616 --- [http-nio-8888-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-06-29 16:40:08.613  INFO 10616 --- [http-nio-8888-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-06-29 16:40:14.542  INFO 10616 --- [http-nio-8888-exec-3] demo.utils.ControllerLogger              : ===========================================
+2021-06-29 16:40:14.543  INFO 10616 --- [http-nio-8888-exec-3] demo.utils.ControllerLogger              : URI : /getAllDynamic
+2021-06-29 16:40:14.543  INFO 10616 --- [http-nio-8888-exec-3] demo.utils.ControllerLogger              : HTTP_METHOD : GET
+2021-06-29 16:40:14.543  INFO 10616 --- [http-nio-8888-exec-3] demo.utils.ControllerLogger              : IP : 0:0:0:0:0:0:0:1
+2021-06-29 16:40:14.543  INFO 10616 --- [http-nio-8888-exec-3] demo.utils.ControllerLogger              : CLASS_METHOD : demo.controller.DynamicController.getAllDynamic
+2021-06-29 16:40:14.543  INFO 10616 --- [http-nio-8888-exec-3] demo.utils.ControllerLogger              : ARGS : []
+2021-06-29 16:40:25.609  INFO 10616 --- [http-nio-8888-exec-7] demo.utils.ControllerLogger              : ===========================================
+2021-06-29 16:40:25.609  INFO 10616 --- [http-nio-8888-exec-7] demo.utils.ControllerLogger              : URI : /getDynamicByGameId
+2021-06-29 16:40:25.609  INFO 10616 --- [http-nio-8888-exec-7] demo.utils.ControllerLogger              : HTTP_METHOD : GET
+2021-06-29 16:40:25.610  INFO 10616 --- [http-nio-8888-exec-7] demo.utils.ControllerLogger              : IP : 0:0:0:0:0:0:0:1
+2021-06-29 16:40:25.610  INFO 10616 --- [http-nio-8888-exec-7] demo.utils.ControllerLogger              : CLASS_METHOD : demo.controller.DynamicController.findDynamicByGameId
+2021-06-29 16:40:25.610  INFO 10616 --- [http-nio-8888-exec-7] demo.utils.ControllerLogger              : ARGS : [1234]
+2021-06-29 16:40:41.108  INFO 10616 --- [http-nio-8888-exec-8] demo.utils.ControllerLogger              : ===========================================
+2021-06-29 16:40:41.109  INFO 10616 --- [http-nio-8888-exec-8] demo.utils.ControllerLogger              : URI : /getUserDynamic
+2021-06-29 16:40:41.109  INFO 10616 --- [http-nio-8888-exec-8] demo.utils.ControllerLogger              : HTTP_METHOD : GET
+2021-06-29 16:40:41.109  INFO 10616 --- [http-nio-8888-exec-8] demo.utils.ControllerLogger              : IP : 0:0:0:0:0:0:0:1
+2021-06-29 16:40:41.109  INFO 10616 --- [http-nio-8888-exec-8] demo.utils.ControllerLogger              : CLASS_METHOD : demo.controller.DynamicController.getUserDynamic
+2021-06-29 16:40:41.109  INFO 10616 --- [http-nio-8888-exec-8] demo.utils.ControllerLogger              : ARGS : [org.apache.catalina.connector.RequestFacade@70fc471c]
+2021-06-29 16:41:03.306  INFO 10616 --- [http-nio-8888-exec-9] demo.utils.ControllerLogger              : ===========================================
+2021-06-29 16:41:03.306  INFO 10616 --- [http-nio-8888-exec-9] demo.utils.ControllerLogger              : URI : /getUserFollow
+2021-06-29 16:41:03.306  INFO 10616 --- [http-nio-8888-exec-9] demo.utils.ControllerLogger              : HTTP_METHOD : GET
+2021-06-29 16:41:03.306  INFO 10616 --- [http-nio-8888-exec-9] demo.utils.ControllerLogger              : IP : 0:0:0:0:0:0:0:1
+2021-06-29 16:41:03.306  INFO 10616 --- [http-nio-8888-exec-9] demo.utils.ControllerLogger              : CLASS_METHOD : demo.controller.UserController.getUserFollowGame
+2021-06-29 16:41:03.307  INFO 10616 --- [http-nio-8888-exec-9] demo.utils.ControllerLogger              : ARGS : [org.apache.catalina.connector.RequestFacade@70fc471c]
