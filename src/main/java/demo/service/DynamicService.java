@@ -47,7 +47,7 @@ public class DynamicService {
         dynamicMapper.insert(dynamic);
     }
 
-    private List<DynamicUserGameVO> transferDynamic(List<Dynamic> list)
+    private List<DynamicUserGameVO> transferDynamic(List<Dynamic> list,String userId)
     {
         List<DynamicUserGameVO> transferList=new ArrayList<>();
         for(Dynamic i: list)
@@ -59,13 +59,14 @@ public class DynamicService {
             BeanUtils.copyProperties(i, dynamicUserGameVO);
             dynamicUserGameVO.setGame(game);
             dynamicUserGameVO.setUser(user);
+            dynamicUserGameVO.setIsLike(UserIsLike(userId,i.getDynamicId()));
             transferList.add(dynamicUserGameVO);
         }
         return transferList;
     }
 
 
-    public List<DynamicUserGameVO> selectAllDynamic() {
+    public List<DynamicUserGameVO> selectAllDynamic(String userId) {
         List<Dynamic> list = dynamicMapper.selectList(new QueryWrapper<Dynamic>());
         list.sort(new Comparator<Dynamic>() {
             @Override
@@ -73,11 +74,11 @@ public class DynamicService {
                 return o2.getPublishAt().compareTo(o1.getPublishAt());
             }
         });
-        return transferDynamic(list);
+        return transferDynamic(list,userId);
     }
 
     public List<DynamicUserGameVO> getUserDynamic(String userId) {
-        return transferDynamic(dynamicMapper.selectList(new QueryWrapper<Dynamic>().eq("user_id", userId)));
+        return transferDynamic(dynamicMapper.selectList(new QueryWrapper<Dynamic>().eq("user_id", userId)),userId);
     }
 
     public void updateUserDynamic(String userId, String dynamicId, String content) throws Exception {
@@ -95,7 +96,7 @@ public class DynamicService {
         dynamicMapper.delete(new QueryWrapper<Dynamic>().eq("dynamic_id", dynamicId));
     }
 
-    public List<DynamicUserGameVO> findDynamicByGameId(String gameId) {
+    public List<DynamicUserGameVO> findDynamicByGameId(String gameId,String userId) {
         List<Dynamic> list = dynamicMapper.selectList(new QueryWrapper<Dynamic>().eq("game_id", gameId));
         list.sort(new Comparator<Dynamic>() {
             @Override
@@ -103,7 +104,7 @@ public class DynamicService {
                 return o2.getPublishAt().compareTo(o1.getPublishAt());
             }
         });
-        return transferDynamic(list);
+        return transferDynamic(list,userId);
     }
 
     public void giveDynamicLikes(String userId, String dynamicId) throws Exception {
@@ -122,10 +123,19 @@ public class DynamicService {
 
     }
 
-    public List<DynamicUserGameVO> getDynamicById(String dynamicId)
+    public List<DynamicUserGameVO> getDynamicById(String dynamicId,String userId)
     {
         List<Dynamic> list=dynamicMapper.selectList(new QueryWrapper<Dynamic>().eq("dynamic_id",dynamicId));
-        return transferDynamic(list);
+        return transferDynamic(list,userId);
+    }
+
+    private int UserIsLike(String userId,String dynamicId)
+    {
+        if(null == userLikesDynamicMapper.selectOne(new QueryWrapper<UserLikesDynamic>().eq("user_id", userId).eq("dynamic_id", dynamicId)))
+        {
+            return 0;
+        }
+        else return 1;
     }
 
 

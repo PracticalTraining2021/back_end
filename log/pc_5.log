@@ -231,3 +231,137 @@
 2021-06-29 16:47:16.750  INFO 14144 --- [http-nio-8888-exec-9] demo.utils.ControllerLogger              : ARGS : [123]
 2021-06-29 16:47:16.805  INFO 14144 --- [http-nio-8888-exec-9] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
 2021-06-29 16:47:17.341  INFO 14144 --- [http-nio-8888-exec-9] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-06-29 16:54:46.481  INFO 7908 --- [main] demo.Application                         : Starting Application on DESKTOP-R727CR4 with PID 7908 (started by cf in C:\Users\cf\Desktop\编码\Java\back_end)
+2021-06-29 16:54:46.481  INFO 7908 --- [main] demo.Application                         : The following profiles are active: cfdev
+2021-06-29 16:54:47.602  INFO 7908 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-29 16:54:47.852  INFO 7908 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
+2021-06-29 16:54:47.860  INFO 7908 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-06-29 16:54:47.860  INFO 7908 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.29]
+2021-06-29 16:54:47.931  INFO 7908 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-06-29 16:54:47.931  INFO 7908 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1400 ms
+2021-06-29 16:54:48.780  WARN 7908 --- [main] c.b.m.core.metadata.TableInfoHelper      : Warn: Could not find @TableId in Class: demo.domain.UserLikesDynamic.
+2021-06-29 16:54:48.812  WARN 7908 --- [main] c.b.m.core.metadata.TableInfoHelper      : Warn: Could not find @TableId in Class: demo.domain.UserLikesGame.
+2021-06-29 16:54:49.077  INFO 7908 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2021-06-29 16:54:49.155  INFO 7908 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-06-29 16:54:49.296  INFO 7908 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2021-06-29 16:54:49.311  INFO 7908 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2021-06-29 16:54:49.343  INFO 7908 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2021-06-29 16:54:49.546  INFO 7908 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
+2021-06-29 16:54:49.546  INFO 7908 --- [main] demo.Application                         : Started Application in 3.551 seconds (JVM running for 4.367)
+2021-06-29 16:54:59.446  INFO 7908 --- [http-nio-8888-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-06-29 16:54:59.446  INFO 7908 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-06-29 16:54:59.454  INFO 7908 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 8 ms
+2021-06-29 16:55:11.782  INFO 7908 --- [http-nio-8888-exec-9] demo.utils.ControllerLogger              : ===========================================
+2021-06-29 16:55:11.783  INFO 7908 --- [http-nio-8888-exec-9] demo.utils.ControllerLogger              : URI : /userLogin
+2021-06-29 16:55:11.783  INFO 7908 --- [http-nio-8888-exec-9] demo.utils.ControllerLogger              : HTTP_METHOD : POST
+2021-06-29 16:55:11.783  INFO 7908 --- [http-nio-8888-exec-9] demo.utils.ControllerLogger              : IP : 0:0:0:0:0:0:0:1
+2021-06-29 16:55:11.785  INFO 7908 --- [http-nio-8888-exec-9] demo.utils.ControllerLogger              : CLASS_METHOD : demo.controller.UserController.userLogin
+2021-06-29 16:55:11.785  INFO 7908 --- [http-nio-8888-exec-9] demo.utils.ControllerLogger              : ARGS : [cf, 123, org.apache.catalina.connector.RequestFacade@6ec53147]
+2021-06-29 16:55:11.809  INFO 7908 --- [http-nio-8888-exec-9] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-06-29 16:55:12.338  INFO 7908 --- [http-nio-8888-exec-9] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-06-29 16:55:17.817  INFO 7908 --- [http-nio-8888-exec-10] demo.utils.ControllerLogger              : ===========================================
+2021-06-29 16:55:17.817  INFO 7908 --- [http-nio-8888-exec-10] demo.utils.ControllerLogger              : URI : /getAllDynamic
+2021-06-29 16:55:17.817  INFO 7908 --- [http-nio-8888-exec-10] demo.utils.ControllerLogger              : HTTP_METHOD : GET
+2021-06-29 16:55:17.817  INFO 7908 --- [http-nio-8888-exec-10] demo.utils.ControllerLogger              : IP : 0:0:0:0:0:0:0:1
+2021-06-29 16:55:17.817  INFO 7908 --- [http-nio-8888-exec-10] demo.utils.ControllerLogger              : CLASS_METHOD : demo.controller.DynamicController.getAllDynamic
+2021-06-29 16:55:17.817  INFO 7908 --- [http-nio-8888-exec-10] demo.utils.ControllerLogger              : ARGS : []
+2021-06-29 16:56:33.870  INFO 7908 --- [http-nio-8888-exec-2] demo.utils.ControllerLogger              : ===========================================
+2021-06-29 16:56:33.870  INFO 7908 --- [http-nio-8888-exec-2] demo.utils.ControllerLogger              : URI : /userRegister
+2021-06-29 16:56:33.871  INFO 7908 --- [http-nio-8888-exec-2] demo.utils.ControllerLogger              : HTTP_METHOD : POST
+2021-06-29 16:56:33.871  INFO 7908 --- [http-nio-8888-exec-2] demo.utils.ControllerLogger              : IP : 0:0:0:0:0:0:0:1
+2021-06-29 16:56:33.871  INFO 7908 --- [http-nio-8888-exec-2] demo.utils.ControllerLogger              : CLASS_METHOD : demo.controller.UserController.userRegister
+2021-06-29 16:56:33.871  INFO 7908 --- [http-nio-8888-exec-2] demo.utils.ControllerLogger              : ARGS : [cf1, 123]
+2021-06-29 16:56:39.169  INFO 7908 --- [http-nio-8888-exec-4] demo.utils.ControllerLogger              : ===========================================
+2021-06-29 16:56:39.170  INFO 7908 --- [http-nio-8888-exec-4] demo.utils.ControllerLogger              : URI : /userLogin
+2021-06-29 16:56:39.170  INFO 7908 --- [http-nio-8888-exec-4] demo.utils.ControllerLogger              : HTTP_METHOD : POST
+2021-06-29 16:56:39.170  INFO 7908 --- [http-nio-8888-exec-4] demo.utils.ControllerLogger              : IP : 0:0:0:0:0:0:0:1
+2021-06-29 16:56:39.170  INFO 7908 --- [http-nio-8888-exec-4] demo.utils.ControllerLogger              : CLASS_METHOD : demo.controller.UserController.userLogin
+2021-06-29 16:56:39.170  INFO 7908 --- [http-nio-8888-exec-4] demo.utils.ControllerLogger              : ARGS : [cf1, 123, org.apache.catalina.connector.RequestFacade@6ec53147]
+2021-06-29 16:56:44.409  INFO 7908 --- [http-nio-8888-exec-6] demo.utils.ControllerLogger              : ===========================================
+2021-06-29 16:56:44.409  INFO 7908 --- [http-nio-8888-exec-6] demo.utils.ControllerLogger              : URI : /getAllDynamic
+2021-06-29 16:56:44.410  INFO 7908 --- [http-nio-8888-exec-6] demo.utils.ControllerLogger              : HTTP_METHOD : GET
+2021-06-29 16:56:44.410  INFO 7908 --- [http-nio-8888-exec-6] demo.utils.ControllerLogger              : IP : 0:0:0:0:0:0:0:1
+2021-06-29 16:56:44.410  INFO 7908 --- [http-nio-8888-exec-6] demo.utils.ControllerLogger              : CLASS_METHOD : demo.controller.DynamicController.getAllDynamic
+2021-06-29 16:56:44.410  INFO 7908 --- [http-nio-8888-exec-6] demo.utils.ControllerLogger              : ARGS : []
+2021-06-29 16:56:59.434  INFO 7908 --- [http-nio-8888-exec-4] demo.utils.ControllerLogger              : ===========================================
+2021-06-29 16:56:59.435  INFO 7908 --- [http-nio-8888-exec-4] demo.utils.ControllerLogger              : URI : /userLogin
+2021-06-29 16:56:59.435  INFO 7908 --- [http-nio-8888-exec-4] demo.utils.ControllerLogger              : HTTP_METHOD : POST
+2021-06-29 16:56:59.435  INFO 7908 --- [http-nio-8888-exec-4] demo.utils.ControllerLogger              : IP : 0:0:0:0:0:0:0:1
+2021-06-29 16:56:59.436  INFO 7908 --- [http-nio-8888-exec-4] demo.utils.ControllerLogger              : CLASS_METHOD : demo.controller.UserController.userLogin
+2021-06-29 16:56:59.436  INFO 7908 --- [http-nio-8888-exec-4] demo.utils.ControllerLogger              : ARGS : [cf1, 123, org.apache.catalina.connector.RequestFacade@6ec53147]
+2021-06-29 16:57:08.156  INFO 7908 --- [http-nio-8888-exec-6] demo.utils.ControllerLogger              : ===========================================
+2021-06-29 16:57:08.157  INFO 7908 --- [http-nio-8888-exec-6] demo.utils.ControllerLogger              : URI : /getAllDynamic
+2021-06-29 16:57:08.157  INFO 7908 --- [http-nio-8888-exec-6] demo.utils.ControllerLogger              : HTTP_METHOD : GET
+2021-06-29 16:57:08.157  INFO 7908 --- [http-nio-8888-exec-6] demo.utils.ControllerLogger              : IP : 0:0:0:0:0:0:0:1
+2021-06-29 16:57:08.157  INFO 7908 --- [http-nio-8888-exec-6] demo.utils.ControllerLogger              : CLASS_METHOD : demo.controller.DynamicController.getAllDynamic
+2021-06-29 16:57:08.157  INFO 7908 --- [http-nio-8888-exec-6] demo.utils.ControllerLogger              : ARGS : []
+2021-06-29 16:57:40.223  INFO 7908 --- [http-nio-8888-exec-2] demo.utils.ControllerLogger              : ===========================================
+2021-06-29 16:57:40.223  INFO 7908 --- [http-nio-8888-exec-2] demo.utils.ControllerLogger              : URI : /userLogin
+2021-06-29 16:57:40.223  INFO 7908 --- [http-nio-8888-exec-2] demo.utils.ControllerLogger              : HTTP_METHOD : POST
+2021-06-29 16:57:40.223  INFO 7908 --- [http-nio-8888-exec-2] demo.utils.ControllerLogger              : IP : 0:0:0:0:0:0:0:1
+2021-06-29 16:57:40.224  INFO 7908 --- [http-nio-8888-exec-2] demo.utils.ControllerLogger              : CLASS_METHOD : demo.controller.UserController.userLogin
+2021-06-29 16:57:40.224  INFO 7908 --- [http-nio-8888-exec-2] demo.utils.ControllerLogger              : ARGS : [cf1, 123, org.apache.catalina.connector.RequestFacade@51eb5ede]
+2021-06-29 16:57:46.285  INFO 7908 --- [http-nio-8888-exec-1] demo.utils.ControllerLogger              : ===========================================
+2021-06-29 16:57:46.285  INFO 7908 --- [http-nio-8888-exec-1] demo.utils.ControllerLogger              : URI : /getAllDynamic
+2021-06-29 16:57:46.285  INFO 7908 --- [http-nio-8888-exec-1] demo.utils.ControllerLogger              : HTTP_METHOD : GET
+2021-06-29 16:57:46.285  INFO 7908 --- [http-nio-8888-exec-1] demo.utils.ControllerLogger              : IP : 0:0:0:0:0:0:0:1
+2021-06-29 16:57:46.285  INFO 7908 --- [http-nio-8888-exec-1] demo.utils.ControllerLogger              : CLASS_METHOD : demo.controller.DynamicController.getAllDynamic
+2021-06-29 16:57:46.285  INFO 7908 --- [http-nio-8888-exec-1] demo.utils.ControllerLogger              : ARGS : []
+2021-06-29 16:58:07.126  INFO 7908 --- [http-nio-8888-exec-2] demo.utils.ControllerLogger              : ===========================================
+2021-06-29 16:58:07.127  INFO 7908 --- [http-nio-8888-exec-2] demo.utils.ControllerLogger              : URI : /userLogin
+2021-06-29 16:58:07.127  INFO 7908 --- [http-nio-8888-exec-2] demo.utils.ControllerLogger              : HTTP_METHOD : POST
+2021-06-29 16:58:07.127  INFO 7908 --- [http-nio-8888-exec-2] demo.utils.ControllerLogger              : IP : 0:0:0:0:0:0:0:1
+2021-06-29 16:58:07.127  INFO 7908 --- [http-nio-8888-exec-2] demo.utils.ControllerLogger              : CLASS_METHOD : demo.controller.UserController.userLogin
+2021-06-29 16:58:07.127  INFO 7908 --- [http-nio-8888-exec-2] demo.utils.ControllerLogger              : ARGS : [cf1, 123, org.apache.catalina.connector.RequestFacade@6ec53147]
+2021-06-29 16:58:16.291  INFO 7908 --- [http-nio-8888-exec-4] demo.utils.ControllerLogger              : ===========================================
+2021-06-29 16:58:16.292  INFO 7908 --- [http-nio-8888-exec-4] demo.utils.ControllerLogger              : URI : /getAllDynamic
+2021-06-29 16:58:16.292  INFO 7908 --- [http-nio-8888-exec-4] demo.utils.ControllerLogger              : HTTP_METHOD : GET
+2021-06-29 16:58:16.292  INFO 7908 --- [http-nio-8888-exec-4] demo.utils.ControllerLogger              : IP : 0:0:0:0:0:0:0:1
+2021-06-29 16:58:16.292  INFO 7908 --- [http-nio-8888-exec-4] demo.utils.ControllerLogger              : CLASS_METHOD : demo.controller.DynamicController.getAllDynamic
+2021-06-29 16:58:16.292  INFO 7908 --- [http-nio-8888-exec-4] demo.utils.ControllerLogger              : ARGS : []
+2021-06-29 17:01:50.403  INFO 1536 --- [main] demo.Application                         : Starting Application on DESKTOP-R727CR4 with PID 1536 (started by cf in C:\Users\cf\Desktop\编码\Java\back_end)
+2021-06-29 17:01:50.403  INFO 1536 --- [main] demo.Application                         : The following profiles are active: cfdev
+2021-06-29 17:01:51.472  INFO 1536 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-29 17:01:51.738  INFO 1536 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
+2021-06-29 17:01:51.747  INFO 1536 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-06-29 17:01:51.747  INFO 1536 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.29]
+2021-06-29 17:01:51.821  INFO 1536 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-06-29 17:01:51.821  INFO 1536 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1363 ms
+2021-06-29 17:01:52.692  WARN 1536 --- [main] c.b.m.core.metadata.TableInfoHelper      : Warn: Could not find @TableId in Class: demo.domain.UserLikesDynamic.
+2021-06-29 17:01:52.717  WARN 1536 --- [main] c.b.m.core.metadata.TableInfoHelper      : Warn: Could not find @TableId in Class: demo.domain.UserLikesGame.
+2021-06-29 17:01:53.001  INFO 1536 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2021-06-29 17:01:53.085  INFO 1536 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-06-29 17:01:53.229  INFO 1536 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2021-06-29 17:01:53.242  INFO 1536 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2021-06-29 17:01:53.304  INFO 1536 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2021-06-29 17:01:53.518  INFO 1536 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
+2021-06-29 17:01:53.520  INFO 1536 --- [main] demo.Application                         : Started Application in 3.636 seconds (JVM running for 4.473)
+2021-06-29 17:02:01.022  INFO 1536 --- [http-nio-8888-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-06-29 17:02:01.023  INFO 1536 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-06-29 17:02:01.029  INFO 1536 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 6 ms
+2021-06-29 17:02:09.807  INFO 1536 --- [http-nio-8888-exec-9] demo.utils.ControllerLogger              : ===========================================
+2021-06-29 17:02:09.809  INFO 1536 --- [http-nio-8888-exec-9] demo.utils.ControllerLogger              : URI : /userLogin
+2021-06-29 17:02:09.809  INFO 1536 --- [http-nio-8888-exec-9] demo.utils.ControllerLogger              : HTTP_METHOD : POST
+2021-06-29 17:02:09.809  INFO 1536 --- [http-nio-8888-exec-9] demo.utils.ControllerLogger              : IP : 0:0:0:0:0:0:0:1
+2021-06-29 17:02:09.811  INFO 1536 --- [http-nio-8888-exec-9] demo.utils.ControllerLogger              : CLASS_METHOD : demo.controller.UserController.userLogin
+2021-06-29 17:02:09.811  INFO 1536 --- [http-nio-8888-exec-9] demo.utils.ControllerLogger              : ARGS : [cf1, 123, org.apache.catalina.connector.RequestFacade@51906fae]
+2021-06-29 17:02:09.834  INFO 1536 --- [http-nio-8888-exec-9] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-06-29 17:02:10.346  INFO 1536 --- [http-nio-8888-exec-9] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-06-29 17:02:17.399  INFO 1536 --- [http-nio-8888-exec-10] demo.utils.ControllerLogger              : ===========================================
+2021-06-29 17:02:17.399  INFO 1536 --- [http-nio-8888-exec-10] demo.utils.ControllerLogger              : URI : /getAllDynamic
+2021-06-29 17:02:17.400  INFO 1536 --- [http-nio-8888-exec-10] demo.utils.ControllerLogger              : HTTP_METHOD : GET
+2021-06-29 17:02:17.400  INFO 1536 --- [http-nio-8888-exec-10] demo.utils.ControllerLogger              : IP : 0:0:0:0:0:0:0:1
+2021-06-29 17:02:17.400  INFO 1536 --- [http-nio-8888-exec-10] demo.utils.ControllerLogger              : CLASS_METHOD : demo.controller.DynamicController.getAllDynamic
+2021-06-29 17:02:17.400  INFO 1536 --- [http-nio-8888-exec-10] demo.utils.ControllerLogger              : ARGS : [org.apache.catalina.connector.RequestFacade@51906fae]
+2021-06-29 17:02:43.863  INFO 1536 --- [http-nio-8888-exec-1] demo.utils.ControllerLogger              : ===========================================
+2021-06-29 17:02:43.863  INFO 1536 --- [http-nio-8888-exec-1] demo.utils.ControllerLogger              : URI : /userLogin
+2021-06-29 17:02:43.863  INFO 1536 --- [http-nio-8888-exec-1] demo.utils.ControllerLogger              : HTTP_METHOD : POST
+2021-06-29 17:02:43.863  INFO 1536 --- [http-nio-8888-exec-1] demo.utils.ControllerLogger              : IP : 0:0:0:0:0:0:0:1
+2021-06-29 17:02:43.863  INFO 1536 --- [http-nio-8888-exec-1] demo.utils.ControllerLogger              : CLASS_METHOD : demo.controller.UserController.userLogin
+2021-06-29 17:02:43.863  INFO 1536 --- [http-nio-8888-exec-1] demo.utils.ControllerLogger              : ARGS : [cf, 123, org.apache.catalina.connector.RequestFacade@51906fae]
+2021-06-29 17:02:51.341  INFO 1536 --- [http-nio-8888-exec-3] demo.utils.ControllerLogger              : ===========================================
+2021-06-29 17:02:51.341  INFO 1536 --- [http-nio-8888-exec-3] demo.utils.ControllerLogger              : URI : /getAllDynamic
+2021-06-29 17:02:51.341  INFO 1536 --- [http-nio-8888-exec-3] demo.utils.ControllerLogger              : HTTP_METHOD : GET
+2021-06-29 17:02:51.341  INFO 1536 --- [http-nio-8888-exec-3] demo.utils.ControllerLogger              : IP : 0:0:0:0:0:0:0:1
+2021-06-29 17:02:51.342  INFO 1536 --- [http-nio-8888-exec-3] demo.utils.ControllerLogger              : CLASS_METHOD : demo.controller.DynamicController.getAllDynamic
+2021-06-29 17:02:51.342  INFO 1536 --- [http-nio-8888-exec-3] demo.utils.ControllerLogger              : ARGS : [org.apache.catalina.connector.RequestFacade@51906fae]

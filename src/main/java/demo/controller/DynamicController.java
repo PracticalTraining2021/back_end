@@ -33,8 +33,9 @@ public class DynamicController {
 
     @GetMapping("/getAllDynamic")
     @ApiOperation("按时间过去所有动态")
-    public Result getAllDynamic() {
-        return Result.OK().data(dynamicService.selectAllDynamic()).build();
+    public Result getAllDynamic(HttpServletRequest request) {
+        String userId = request.getSession().getAttribute("user").toString();
+        return Result.OK().data(dynamicService.selectAllDynamic(userId)).build();
     }
 
     @GetMapping("/getUserDynamic")
@@ -62,8 +63,9 @@ public class DynamicController {
 
     @GetMapping("/getDynamicByGameId")
     @ApiOperation("按游戏获取动态")
-    public Result findDynamicByGameId(@RequestParam("gameId") String gameId) {
-        return Result.OK().data(dynamicService.findDynamicByGameId(gameId)).build();
+    public Result findDynamicByGameId(@RequestParam("gameId") String gameId,HttpServletRequest request) {
+        String userId = request.getSession().getAttribute("user").toString();
+        return Result.OK().data(dynamicService.findDynamicByGameId(gameId,userId)).build();
     }
 
     @PostMapping("/giveDynamicLike")
@@ -76,9 +78,10 @@ public class DynamicController {
 
     @GetMapping("/getDynamicById")
     @ApiOperation("按动态id拿动态")
-    public Result getDynamicById(@RequestParam("dynamicId") String dynamicId)
+    public Result getDynamicById(@RequestParam("dynamicId") String dynamicId,HttpServletRequest request)
     {
-        return Result.OK().data(dynamicService.getDynamicById(dynamicId)).build();
+        String userId = request.getSession().getAttribute("user").toString();
+        return Result.OK().data(dynamicService.getDynamicById(dynamicId,userId)).build();
     }
 
 }
