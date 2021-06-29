@@ -122,4 +122,11 @@ public class DynamicService {
 
     }
 
+    public List<DynamicUserGameVO> getDynamicById(String dynamicId)
+    {
+        List<Dynamic> list=dynamicMapper.selectList(new QueryWrapper<Dynamic>().eq("dynamic_id",dynamicId));
+        return transferDynamic(list);
+    }
+
+
 }

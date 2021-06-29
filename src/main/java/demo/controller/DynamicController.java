@@ -74,4 +74,11 @@ public class DynamicController {
         return Result.OK().build();
     }
 
+    @GetMapping("/getDynamicById")
+    @ApiOperation("按动态id拿动态")
+    public Result getDynamicById(@RequestParam("dynamicId") String dynamicId)
+    {
+        return Result.OK().data(dynamicService.getDynamicById(dynamicId)).build();
+    }
+
 }
