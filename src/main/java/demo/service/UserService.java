@@ -10,8 +10,10 @@ import demo.vo.Result;
 import demo.vo.UserVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.util.DigestUtils;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -35,7 +37,8 @@ public class UserService {
             ok = false;
 
         assert user != null;
-        if (!password.equals(user.getPassword()))
+        String encodedPassword = DigestUtils.md5DigestAsHex(password.getBytes());
+        if (!encodedPassword.equals(user.getPassword()))
             ok = false;
 
         if (ok) {
@@ -48,14 +51,15 @@ public class UserService {
         return Result.BAD().data("用户名或密码不正确").build();
     }
 
-    public Result userRegister(String username, String password) {
+    public Result userRegister(String username, String password, String nickname) {
         User user = userMapper.getUserByUsername(username);
         if (user != null)
             return Result.BAD().data("用户名已存在").build();
 
         user = new User();
         user.setUsername(username);
-        user.setPassword(password);
+        user.setPassword(DigestUtils.md5DigestAsHex(password.getBytes()));
+        user.setNickname(nickname);
         Integer insertRes = userMapper.insert(user);
 
         if (insertRes == 0) return Result.BAD().data("注册失败").build();
@@ -82,6 +86,7 @@ public class UserService {
 
     public List<Game> getUserLikeGame(String userId) {
         List<String> gameIdList = userLikesGameMapper.selectGameId(userId);
+        if (gameIdList == null || gameIdList.size() == 0) return new ArrayList<>();
         return gameMapper.selectBatchIds(gameIdList);
     }
 }

@@ -12,7 +12,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -48,12 +48,12 @@ public class GameController {
 
     @ApiOperation("用户关注或取消关注游戏")
     @PostMapping("/userLikesGame")
-    public Result handleUserFollows(@RequestParam(value = "gameId", required = true) String gameId, HttpSession session) {
-        String userId = (String) session.getAttribute("user");
+    public Result handleUserFollows(@RequestParam(value = "gameId", required = true) String gameId, HttpServletRequest request) {
+        String userId = (String) request.getSession().getAttribute("user");
         if (StringUtils.isEmpty(userId))
             throw new BusinessException(ErrorCode.BAD_REQUEST_COMMON, "用户未登录");
 
-        UserLikesGame ulg = new UserLikesGame(gameId, userId);
+        UserLikesGame ulg = new UserLikesGame(userId, gameId);
         Result result = gameService.handleUserLikesGame(ulg);
         return result;
     }
