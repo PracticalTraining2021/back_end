@@ -3,6 +3,7 @@ package demo.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import demo.domain.Comment;
 import demo.domain.UserLikesComment;
+import demo.vo.CommentVO;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
@@ -12,8 +13,8 @@ import java.util.List;
 @Repository
 public interface CommentMapper extends BaseMapper<Comment> {
 
-    @Select("select * from comment where game_id = #{gameId}")
-    List<Comment> getAllCommentsByGameId(String gameId);
+    @Select("select comment_id,game_id,c.user_id,content,score,likes_count,comment_at,avatar,nickname from comment c,user u where c.game_id = #{gameId} and c.user_id = u.user_id")
+    List<CommentVO> getAllCommentsByGameId(String gameId);
 
     @Select("select count(*) from comment where user_id = #{userId} and game_id = #{gameId}")
     Integer getCountByUserIdAndGameId(@Param("userId") String userId, @Param("gameId") String gameId);

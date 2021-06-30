@@ -51,16 +51,6 @@ public class UserController {
         return userService.getUserMessage(userId);
     }
 
-//    @PostMapping("/gameFollow")
-//    @ApiOperation("用户关注游戏")
-//    public Result userFollowGame(HttpServletRequest request, @RequestParam("gameId") String gameId) throws Exception {
-//        String userId = (String) request.getSession().getAttribute("user");
-//        if (StringUtils.isEmpty(userId))
-//            throw new BusinessException(ErrorCode.BAD_REQUEST_COMMON, "用户未登录");
-//        userService.userFollowGame(userId, gameId);
-//        return Result.OK().build();
-//    }
-
     @GetMapping("/getUserFollow")
     @ApiOperation("获取用户关注游戏列表")
     public Result getUserFollowGame(HttpServletRequest request) {
@@ -70,4 +60,5 @@ public class UserController {
         return Result.OK().data(userService.getUserLikeGame(userId)).build();
     }
 
+    
 }

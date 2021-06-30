@@ -5,9 +5,11 @@ import demo.domain.UserLikesGame;
 import demo.exception.BusinessException;
 import demo.exception.ErrorCode;
 import demo.service.GameService;
+import demo.vo.GameVO;
 import demo.vo.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.BeanUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,9 +34,17 @@ public class GameController {
 
     @ApiOperation("获取指定游戏实体的信息")
     @GetMapping("/one")
-    public Result getOneGame(@RequestParam("gameId") String gameId) {
+    public Result getOneGame(@RequestParam("gameId") String gameId, HttpServletRequest request) {
         Game one = gameService.getById(gameId);
-        return Result.OK().data(one).build();
+        GameVO gameVO = new GameVO();
+        BeanUtils.copyProperties(one, gameVO);
+        String userId = (String) request.getSession().getAttribute("user");
+        if (StringUtils.isEmpty(userId))
+            return Result.OK().data(gameVO).build();
+
+        boolean isCurUserLikeTheGame = gameService.isUserLikeGame(gameId, userId);
+        gameVO.setCurrentUserLikes(isCurUserLikeTheGame);
+        return Result.OK().data(gameVO).build();
     }
 
     @ApiOperation("下载指定游戏")

@@ -5,6 +5,7 @@ import demo.domain.UserLikesComment;
 import demo.exception.BusinessException;
 import demo.exception.ErrorCode;
 import demo.service.CommentService;
+import demo.vo.CommentVO;
 import demo.vo.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -26,7 +27,7 @@ public class CommentController {
     @ApiOperation("获取指定游戏的所有评论")
     @GetMapping("/all")
     public Result allComments(@RequestParam(value = "gameId", required = true) String gameId) {
-        List<Comment> comments = commentService.getAllCommentsByGameId(gameId);
+        List<CommentVO> comments = commentService.getAllCommentsByGameId(gameId);
         return Result.OK().data(comments).build();
     }
 

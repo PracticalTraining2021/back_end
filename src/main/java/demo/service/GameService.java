@@ -73,4 +73,8 @@ public class GameService {
         return gameMapper.insert(game);
     }
 
+    public boolean isUserLikeGame(String gameId, String userId) {
+        UserLikesGame ulg = new UserLikesGame(userId, gameId);
+        return gameMapper.getCountByUlg(ulg) > 0;
+    }
 }

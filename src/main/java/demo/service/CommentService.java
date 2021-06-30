@@ -3,6 +3,7 @@ package demo.service;
 import demo.domain.Comment;
 import demo.domain.UserLikesComment;
 import demo.mapper.CommentMapper;
+import demo.vo.CommentVO;
 import demo.vo.Result;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -22,7 +23,7 @@ public class CommentService {
     @Resource
     private GameService gameService;
 
-    public List<Comment> getAllCommentsByGameId(String gameId) {
+    public List<CommentVO> getAllCommentsByGameId(String gameId) {
         return commentMapper.getAllCommentsByGameId(gameId);
     }
 
