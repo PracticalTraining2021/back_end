@@ -168,7 +168,15 @@ public class DynamicService {
     public List<DynamicUserGameVO> getMyFavouritesDynamic(String userId) {
         List<String> dynamicIds = userCollectDynamicMapper.getMyFavouritesDynamic(userId);
         if (dynamicIds == null || dynamicIds.size() == 0) return new ArrayList<>();
-        return transferDynamic(dynamicMapper.selectBatchIds(dynamicIds), userId);
+        List<Dynamic> dynamicList = dynamicMapper.selectBatchIds(dynamicIds);
+        dynamicList.sort(new Comparator<Dynamic>() {
+            @Override
+            public int compare(Dynamic o1, Dynamic o2) {
+
+                return (int) (o2.getPublishAt() - o1.getPublishAt());
+            }
+        });
+        return transferDynamic(dynamicList, userId);
     }
 
     public List<DynamicUserGameVO> getMyFavouritesGameDynamic(String userId) {
@@ -178,6 +186,13 @@ public class DynamicService {
             List<Dynamic> list = dynamicMapper.getMyFavouritesGameDynamicByGameId(gameId);
             dynamicList.addAll(list);
         }
+        dynamicList.sort(new Comparator<Dynamic>() {
+            @Override
+            public int compare(Dynamic o1, Dynamic o2) {
+
+                return (int) (o2.getPublishAt() - o1.getPublishAt());
+            }
+        });
         return transferDynamic(dynamicList, userId);
     }
 

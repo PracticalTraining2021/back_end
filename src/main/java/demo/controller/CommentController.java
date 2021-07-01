@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Api(tags = {"评论相关接口"})
@@ -52,8 +51,8 @@ public class CommentController {
     public Result changeContent(@RequestParam(value = "commentId", required = true) String commentId,
                                 @RequestParam(value = "content", required = true) String content,
                                 @RequestParam(value = "score", required = false) Integer score,
-                                HttpSession session) {
-        String userId = (String) session.getAttribute("user");
+                                HttpServletRequest request) {
+        String userId = (String) request.getSession().getAttribute("user");
         if (StringUtils.isEmpty(userId))
             throw new BusinessException(ErrorCode.BAD_REQUEST_COMMON, "用户未登录");
 
@@ -65,8 +64,8 @@ public class CommentController {
 
     @ApiOperation("用户点赞或取消点赞指定评论")
     @PostMapping("/userLikesComment")
-    public Result handleUlc(@RequestParam("commentId") String commentId, HttpSession session) {
-        String userId = (String) session.getAttribute("user");
+    public Result handleUlc(@RequestParam("commentId") String commentId, HttpServletRequest request) {
+        String userId = (String) request.getSession().getAttribute("user");
         if (StringUtils.isEmpty(userId))
             throw new BusinessException(ErrorCode.BAD_REQUEST_COMMON, "用户未登录");
 
