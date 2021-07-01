@@ -89,4 +89,10 @@ public class UserService {
         if (gameIdList == null || gameIdList.size() == 0) return new ArrayList<>();
         return gameMapper.selectBatchIds(gameIdList);
     }
+
+    public List<String> getUserLikeGameIdList(String userId) {
+        List<String> gameIdList = userLikesGameMapper.selectGameId(userId);
+        if (gameIdList == null || gameIdList.size() == 0) return new ArrayList<>();
+        return gameIdList;
+    }
 }

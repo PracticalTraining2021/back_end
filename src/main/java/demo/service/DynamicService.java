@@ -34,29 +34,31 @@ public class DynamicService {
     @Resource
     private UserCollectDynamicMapper userCollectDynamicMapper;
 
+    @Resource
+    private UserService userService;
+
     public void createDynamic(DynamicVO dynamicVO, String userId) {
         Dynamic dynamic = new Dynamic();
         BeanUtils.copyProperties(dynamicVO, dynamic);
         dynamic.setUserId(userId);
         dynamic.setLikesCount(0);
-        dynamic.setPublishAt(new Date());
+        dynamic.setPublishAt((new Date()).getTime());
+        System.out.println(dynamic.getPublishAt());
         dynamicMapper.insert(dynamic);
     }
 
-    private List<DynamicUserGameVO> transferDynamic(List<Dynamic> list,String userId)
-    {
-        List<DynamicUserGameVO> transferList=new ArrayList<>();
-        for(Dynamic i: list)
-        {
-            DynamicUserGameVO dynamicUserGameVO=new DynamicUserGameVO();
-            User user=userMapper.selectById(i.getUserId());
-            Game game=gameMapper.selectById(i.getGameId());
+    private List<DynamicUserGameVO> transferDynamic(List<Dynamic> list, String userId) {
+        List<DynamicUserGameVO> transferList = new ArrayList<>();
+        for (Dynamic i : list) {
+            DynamicUserGameVO dynamicUserGameVO = new DynamicUserGameVO();
+            User user = userMapper.selectById(i.getUserId());
+            Game game = gameMapper.selectById(i.getGameId());
             user.setPassword("***");
             BeanUtils.copyProperties(i, dynamicUserGameVO);
             dynamicUserGameVO.setGame(game);
             dynamicUserGameVO.setUser(user);
-            dynamicUserGameVO.setIsLike(UserIsLike(userId,i.getDynamicId()));
-            dynamicUserGameVO.setIsCollect(UserIsCollect(userId,i.getDynamicId()));
+            dynamicUserGameVO.setIsLike(UserIsLike(userId, i.getDynamicId()));
+            dynamicUserGameVO.setIsCollect(UserIsCollect(userId, i.getDynamicId()));
             transferList.add(dynamicUserGameVO);
         }
         return transferList;
@@ -68,21 +70,22 @@ public class DynamicService {
         list.sort(new Comparator<Dynamic>() {
             @Override
             public int compare(Dynamic o1, Dynamic o2) {
-                return o2.getPublishAt().compareTo(o1.getPublishAt());
+
+                return (int) (o2.getPublishAt() - o1.getPublishAt());
             }
         });
-        return transferDynamic(list,userId);
+        return transferDynamic(list, userId);
     }
 
     public List<DynamicUserGameVO> getUserDynamic(String userId) {
-        return transferDynamic(dynamicMapper.selectList(new QueryWrapper<Dynamic>().eq("user_id", userId)),userId);
+        return transferDynamic(dynamicMapper.selectList(new QueryWrapper<Dynamic>().eq("user_id", userId)), userId);
     }
 
     public void updateUserDynamic(String userId, String dynamicId, String content) throws Exception {
         Dynamic dynamic = dynamicMapper.selectById(dynamicId);
         if (!userId.equals(dynamic.getUserId())) throw new Exception("非用户自己所属的动态");
         dynamic.setContent(content);
-        dynamic.setPublishAt(new Date());
+        dynamic.setPublishAt((new Date()).getTime());
         dynamicMapper.update(dynamic, new QueryWrapper<Dynamic>().eq("dynamic_id", dynamicId));
     }
 
@@ -93,15 +96,15 @@ public class DynamicService {
         dynamicMapper.delete(new QueryWrapper<Dynamic>().eq("dynamic_id", dynamicId));
     }
 
-    public List<DynamicUserGameVO> findDynamicByGameId(String gameId,String userId) {
+    public List<DynamicUserGameVO> findDynamicByGameId(String gameId, String userId) {
         List<Dynamic> list = dynamicMapper.selectList(new QueryWrapper<Dynamic>().eq("game_id", gameId));
         list.sort(new Comparator<Dynamic>() {
             @Override
             public int compare(Dynamic o1, Dynamic o2) {
-                return o2.getPublishAt().compareTo(o1.getPublishAt());
+                return (int) (o2.getPublishAt() - o1.getPublishAt());
             }
         });
-        return transferDynamic(list,userId);
+        return transferDynamic(list, userId);
     }
 
     public void giveDynamicLikes(String userId, String dynamicId) throws Exception {
@@ -120,48 +123,60 @@ public class DynamicService {
 
     }
 
-    public List<DynamicUserGameVO> getDynamicById(String dynamicId,String userId)
-    {
-        List<Dynamic> list=dynamicMapper.selectList(new QueryWrapper<Dynamic>().eq("dynamic_id",dynamicId));
-        return transferDynamic(list,userId);
+    public List<DynamicUserGameVO> getDynamicById(String dynamicId, String userId) {
+        List<Dynamic> list = dynamicMapper.selectList(new QueryWrapper<Dynamic>().eq("dynamic_id", dynamicId));
+        return transferDynamic(list, userId);
     }
 
-    public void favoritesDynamic(String userId,String dynamicId) throws Exception {
-        if(UserIsCollect(userId,dynamicId)==0) {
+    public void favoritesDynamic(String userId, String dynamicId) throws Exception {
+        if (UserIsCollect(userId, dynamicId) == 0) {
             UserCollectDynamic userCollectDynamic = new UserCollectDynamic();
             userCollectDynamic.setDynamicId(dynamicId);
             userCollectDynamic.setUserId(userId);
             userCollectDynamicMapper.insert(userCollectDynamic);
-        }
-        else {
-            throw  new Exception("已收藏");
-        }
-    }
-
-    public void deleteFavouritesDynamic(String userId,String dynamicId) throws Exception {
-        if(UserIsCollect(userId,dynamicId)==1) {
-            userCollectDynamicMapper.delete(new QueryWrapper<UserCollectDynamic>().eq("user_id",userId).eq("dynamic_id",dynamicId));
-        }
-        else {
-            throw  new Exception("没有收藏");
+        } else {
+            throw new Exception("已收藏");
         }
     }
 
-    private int UserIsLike(String userId,String dynamicId)
-    {
-        if(null == userLikesDynamicMapper.selectOne(new QueryWrapper<UserLikesDynamic>().eq("user_id", userId).eq("dynamic_id", dynamicId)))
-        {
+    public void deleteFavouritesDynamic(String userId, String dynamicId) throws Exception {
+        if (UserIsCollect(userId, dynamicId) == 1) {
+            userCollectDynamicMapper.delete(new QueryWrapper<UserCollectDynamic>().eq("user_id", userId).eq("dynamic_id", dynamicId));
+        } else {
+            throw new Exception("没有收藏");
+        }
+    }
+
+    private int UserIsLike(String userId, String dynamicId) {
+        if (null == userLikesDynamicMapper.selectOne(new QueryWrapper<UserLikesDynamic>().eq("user_id", userId).eq("dynamic_id", dynamicId))) {
             return 0;
-        }
-        else return 1;
+        } else return 1;
     }
 
-    private int UserIsCollect(String userId,String dynamicId)
-    {
-        if(null == userCollectDynamicMapper.selectOne(new QueryWrapper<UserCollectDynamic>().eq("user_id", userId).eq("dynamic_id", dynamicId)))
-        {
+    private int UserIsCollect(String userId, String dynamicId) {
+        if (null == userCollectDynamicMapper.selectOne(new QueryWrapper<UserCollectDynamic>().eq("user_id", userId).eq("dynamic_id", dynamicId))) {
             return 0;
-        }
-        else return 1;
+        } else return 1;
     }
+
+    public List<DynamicUserGameVO> getMyFavouritesDynamic(String userId) {
+        List<String> dynamicIds = userCollectDynamicMapper.getMyFavouritesDynamic(userId);
+        if (dynamicIds == null || dynamicIds.size() == 0) return new ArrayList<>();
+        return transferDynamic(dynamicMapper.selectBatchIds(dynamicIds), userId);
+    }
+
+    public List<DynamicUserGameVO> getMyFavouritesGameDynamic(String userId) {
+        List<String> gameIdList = userService.getUserLikeGameIdList(userId);
+        List<Dynamic> dynamicList = new ArrayList<>();
+        for (String gameId : gameIdList) {
+            List<Dynamic> list = dynamicMapper.getMyFavouritesGameDynamicByGameId(gameId);
+            dynamicList.addAll(list);
+        }
+        return transferDynamic(dynamicList, userId);
+    }
+
+//    public static void main(String[] args) {
+//        System.out.println((new Date()).getTime());
+//        System.out.println(new java.sql.Date((new Date()).getTime()));
+//    }
 }

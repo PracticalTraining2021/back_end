@@ -4,6 +4,7 @@ package demo.controller;
 import demo.exception.BusinessException;
 import demo.exception.ErrorCode;
 import demo.service.DynamicService;
+import demo.vo.DynamicUserGameVO;
 import demo.vo.DynamicVO;
 import demo.vo.Result;
 import io.swagger.annotations.Api;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @RestController
 @Api(tags = {"动态管理"})
@@ -122,4 +124,23 @@ public class DynamicController {
         return Result.OK().build();
     }
 
+    @GetMapping("/getMyFavouritesDynamic")
+    @ApiOperation("获取我的收藏动态")
+    public Result getMyFavouritesDynamic(HttpServletRequest request) {
+        String userId = (String) request.getSession().getAttribute("user");
+        if (StringUtils.isEmpty(userId))
+            throw new BusinessException(ErrorCode.BAD_REQUEST_COMMON, "用户未登录");
+        List<DynamicUserGameVO> result = dynamicService.getMyFavouritesDynamic(userId);
+        return Result.OK().data(result).build();
+    }
+
+    @GetMapping("/getMyFavouritesGameDynamic")
+    @ApiOperation("获取我的收藏游戏的动态")
+    public Result getMyFavouritesGameDynamic(HttpServletRequest request) {
+        String userId = (String) request.getSession().getAttribute("user");
+        if (StringUtils.isEmpty(userId))
+            throw new BusinessException(ErrorCode.BAD_REQUEST_COMMON, "用户未登录");
+        List<DynamicUserGameVO> result = dynamicService.getMyFavouritesGameDynamic(userId);
+        return Result.OK().data(result).build();
+    }
 }

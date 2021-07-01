@@ -16,5 +16,8 @@ public class GameVO {
     private double avgScore;
     private int commentCount;
     private int interestCount;
+    private String icon;
+    private String displayDrawings;
+    private String briefIntro;
     private boolean isCurrentUserLikes;
 }
