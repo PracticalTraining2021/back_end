@@ -13,6 +13,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -33,8 +34,8 @@ public class CommentController {
 
     @ApiOperation("为指定游戏添加评论")
     @PostMapping("/addComment")
-    public Result insertComment(@RequestBody Comment comment, HttpSession session) {
-        String userId = (String) session.getAttribute("user");
+    public Result insertComment(@RequestBody Comment comment, HttpServletRequest request) {
+        String userId = (String) request.getSession().getAttribute("user");
         if (StringUtils.isEmpty(userId))
             throw new BusinessException(ErrorCode.BAD_REQUEST_COMMON, "用户未登录");
         if (StringUtils.isEmpty(comment.getGameId()))

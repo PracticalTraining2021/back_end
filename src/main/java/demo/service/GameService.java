@@ -2,6 +2,8 @@ package demo.service;
 
 import demo.domain.Game;
 import demo.domain.UserLikesGame;
+import demo.exception.BusinessException;
+import demo.exception.ErrorCode;
 import demo.mapper.GameMapper;
 import demo.vo.Result;
 import org.springframework.stereotype.Service;
@@ -33,6 +35,9 @@ public class GameService {
     //    计算平均评分
     public Map computeAvgScore(String gameId, Integer addedScore) {
         Game game = gameMapper.selectById(gameId);
+        if (game == null) {
+            throw new BusinessException(ErrorCode.BAD_REQUEST_COMMON, "找不到指定的游戏(gameId不存在)");
+        }
         Integer commentCount = game.getCommentCount();
         double avgScore = game.getAvgScore();
         avgScore = (avgScore * commentCount + addedScore) / (commentCount + 1);

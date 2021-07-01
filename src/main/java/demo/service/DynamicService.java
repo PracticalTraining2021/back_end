@@ -2,6 +2,8 @@ package demo.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import demo.domain.*;
+import demo.exception.BusinessException;
+import demo.exception.ErrorCode;
 import demo.mapper.*;
 import demo.vo.DynamicUserGameVO;
 import demo.vo.DynamicVO;
@@ -38,6 +40,10 @@ public class DynamicService {
     private UserService userService;
 
     public void createDynamic(DynamicVO dynamicVO, String userId) {
+        Game game = gameMapper.selectById(dynamicVO.getGameId());
+        if (game == null) {
+            throw new BusinessException(ErrorCode.BAD_REQUEST_COMMON, "找不到指定的游戏(gameId不存在)");
+        }
         Dynamic dynamic = new Dynamic();
         BeanUtils.copyProperties(dynamicVO, dynamic);
         dynamic.setUserId(userId);

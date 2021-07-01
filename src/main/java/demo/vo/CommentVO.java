@@ -5,8 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,7 +22,7 @@ public class CommentVO {
     @ApiModelProperty("点赞数")
     private Integer likesCount;
     @ApiModelProperty("评价时间")
-    private Date commentAt;
+    private long commentAt;
     private String avatar;
     private String nickname;
 }

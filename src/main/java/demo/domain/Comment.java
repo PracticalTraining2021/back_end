@@ -6,8 +6,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import java.util.Date;
-
 @Data
 @ApiModel("评价实体")
 public class Comment {
@@ -25,5 +23,5 @@ public class Comment {
     @ApiModelProperty("点赞数")
     private Integer likesCount;
     @ApiModelProperty("评价时间")
-    private Date commentAt;
+    private long commentAt;
 }

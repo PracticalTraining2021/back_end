@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import java.sql.SQLSyntaxErrorException;
+import java.util.Arrays;
 import java.util.Set;
 
 /**
@@ -49,8 +50,9 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public Result expHandler(Exception e) {
         logger.error(e.getMessage());
+        System.out.println(Arrays.toString(e.getStackTrace()));
 
-        return Result.BAD().data(e.getMessage()).build();
+        return Result.BAD().data(e.getMessage() + "abc").build();
     }
 
     /**

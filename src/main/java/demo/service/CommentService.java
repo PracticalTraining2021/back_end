@@ -40,12 +40,12 @@ public class CommentService {
             comment.setScore(10);
         if (StringUtils.isEmpty(comment.getContent()))
             comment.setContent("体验很好");
-        if (comment.getCommentAt() == null)
-            comment.setCommentAt(new Date());
+        if (comment.getCommentAt() == 0)
+            comment.setCommentAt((new Date()).getTime());
 
-        commentMapper.insert(comment);
 
         gameService.computeAvgScore(comment.getGameId(), comment.getScore());
+        commentMapper.insert(comment);
 
         return Result.OK().data(comment).build();
     }
