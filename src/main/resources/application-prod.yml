@@ -11,3 +11,5 @@ mybatis-plus:
 
 logging:
   file: log/pc_5.log
+
+prefix: "/usr/local/tomcat/apache-tomcat-9.0.48/webapps/images/"

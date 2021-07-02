@@ -1,43 +1,43 @@
 package demo.controller;
 
-import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import demo.vo.Result;
+import io.swagger.annotations.Api;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-//@Api(tags = {"图片上传或下载接口"})
-//@RestController
-//@RequestMapping("/image")
+@Api(tags = {"图片上传或下载接口"})
+@RestController
+@RequestMapping("/image")
 public class ImageController {
 
-    private String prefix = "images/";
+    @Value("${prefix}")
+    private String prefix = "/images/";
 
-    @ApiOperation("下载指定图片")
-    @GetMapping("/download")
-    public void getFileByUrl(@RequestParam(value = "img_url", required = true) String url,
-                             HttpServletResponse response) {
-        Path path = Paths.get(prefix, url);
-        System.out.println("图片绝对路径：" + path.toAbsolutePath().toString());
-        if (!Files.exists(path)) {
-            System.out.println("不存在图片路径：" + path.toAbsolutePath().toString());
-//            return Result.BAD().data("该图片不存在").build();
-        }
+    @PostMapping("/upload")
+    public Result uploadImg(MultipartFile multipartFile) {
+        String fileName = multipartFile.getOriginalFilename();
+        String filePath = prefix + fileName;
+        File dist = new File(filePath);
         try {
-            response.reset();
-            response.setContentType("application/x-download;charset=utf-8");
-            response.setHeader("Content-Disposition", "attachment;filename=" + new String(url.getBytes("utf-8"), "ISO8859-1"));
-            Files.copy(path, response.getOutputStream());
-            response.getOutputStream().flush();
+            BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(dist));
+            bos.write(multipartFile.getBytes());
+            bos.close();
+            return Result.OK().data("上传图片成功").build();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-//        return Result.OK().data("成功下载图片").build();
+        return Result.BAD().data("上传图片失败").build();
     }
 
 

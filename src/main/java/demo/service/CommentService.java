@@ -24,14 +24,6 @@ public class CommentService {
     private GameService gameService;
 
     public List<CommentVO> getAllCommentsByGameId(String gameId, String userId) {
-//        List<CommentVO> commentVOList = commentMapper.getAllCommentsByGameId(gameId);
-//        if (userId == null)
-//            return commentVOList;
-//        for (CommentVO vo : commentVOList) {
-//            Integer count = commentMapper.getCountByUserIdAndCommentIdFromULC(userId, vo.getCommentId());
-//            vo.setLike(count != null && count > 0);
-//        }
-//        return commentVOList;
 
         List<CommentVO> commentVOList = commentMapper.getAllCommentsByGameIdTest(gameId, userId);
         return commentVOList;
@@ -58,6 +50,10 @@ public class CommentService {
         commentMapper.insert(comment);
 
         return Result.OK().data(comment).build();
+    }
+
+    public Comment getCommentByCommentId(String commentId) {
+        return commentMapper.selectById(commentId);
     }
 
     public Integer updateComment(String commentId, String content, Integer score) {

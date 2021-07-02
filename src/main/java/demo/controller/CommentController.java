@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Objects;
 
 @Api(tags = {"评论相关接口"})
 @RestController
@@ -58,6 +59,12 @@ public class CommentController {
         if (StringUtils.isEmpty(userId))
             throw new BusinessException(ErrorCode.BAD_REQUEST_COMMON, "用户未登录");
 
+        Comment comment = commentService.getCommentByCommentId(commentId);
+        if (Objects.isNull(comment))
+            throw new BusinessException(ErrorCode.BAD_REQUEST_COMMON, "该评论不存在");
+        if (!Objects.equals(comment.getUserId(), userId))
+            throw new BusinessException(ErrorCode.BAD_REQUEST_COMMON, "该用户没有权限修改其他用户的评论");
+
         Integer updateRes = commentService.updateComment(commentId, content, score);
         if (updateRes == 0) throw new BusinessException(ErrorCode.BAD_REQUEST_COMMON, "修改评价失败");
 //        return Result.BAD().data("修改评价失败").build();
@@ -74,10 +81,5 @@ public class CommentController {
         UserLikesComment ulc = new UserLikesComment(userId, commentId);
         Result result = commentService.handleUserLikesComment(ulc);
         return result;
-    }
-
-    @GetMapping("/test")
-    public Result test() {
-        return Result.OK().data("/comment/test").build();
     }
 }

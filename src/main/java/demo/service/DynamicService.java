@@ -39,6 +39,10 @@ public class DynamicService {
     @Resource
     private UserService userService;
 
+    public Dynamic getDynamicByDynamicId(String dynamicId) {
+        return dynamicMapper.selectById(dynamicId);
+    }
+
     public void createDynamic(DynamicVO dynamicVO, String userId) {
         Game game = gameMapper.selectById(dynamicVO.getGameId());
         if (game == null) {

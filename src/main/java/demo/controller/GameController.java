@@ -70,6 +70,7 @@ public class GameController {
 
     @PostMapping("/addGame")
     public Result insertGame(@RequestBody Game game) {
+        game.setGameId(null);
         gameService.insertGame(game);
         return Result.OK().data("添加游戏成功").build();
     }

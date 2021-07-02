@@ -3,6 +3,8 @@ package demo.service;
 import demo.domain.Game;
 import demo.domain.User;
 import demo.domain.UserLikesGame;
+import demo.exception.BusinessException;
+import demo.exception.ErrorCode;
 import demo.mapper.GameMapper;
 import demo.mapper.UserLikesGameMapper;
 import demo.mapper.UserMapper;
@@ -34,9 +36,9 @@ public class UserService {
         boolean ok = true;
         User user = userMapper.getUserByUsername(username);
         if (user == null)
-            ok = false;
+            throw new BusinessException(ErrorCode.BAD_REQUEST_COMMON, "不存在该用户");
 
-        assert user != null;
+
         String encodedPassword = DigestUtils.md5DigestAsHex(password.getBytes());
         if (!encodedPassword.equals(user.getPassword()))
             ok = false;
