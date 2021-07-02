@@ -40,6 +40,9 @@ public interface CommentMapper extends BaseMapper<Comment> {
             "where user_id = #{ulc.userId} and comment_id = #{ulc.commentId}")
     Integer getCountByUlc(@Param("ulc") UserLikesComment ulc);
 
+    @Select("select count(*) from user_likes_comment where user_id=#{userId} and comment_id=#{commentId}  ")
+    Integer getCountByUserIdAndCommentIdFromULC(@Param("userId") String userId, @Param("commentId") String commentId);
+
     @Insert("insert into user_likes_comment (user_id, comment_id) " +
             "values(#{ulc.userId}, #{ulc.commentId})")
     Integer insertUlc(@Param("ulc") UserLikesComment ulc);
@@ -47,4 +50,9 @@ public interface CommentMapper extends BaseMapper<Comment> {
     @Delete("delete from user_likes_comment " +
             "where user_id = #{ulc.userId} and comment_id = #{ulc.commentId}")
     Integer deleteByUlc(@Param("ulc") UserLikesComment ulc);
+
+    @Select("select comment_id,game_id,c.user_id,content,score,likes_count,comment_at,avatar,nickname,(select count(*) from user_likes_comment s where s.user_id=#{userId} and s.comment_id=c.comment_id) as is_like from comment c,user u where c.game_id = #{gameId} and c.user_id = u.user_id")
+    List<CommentVO> getAllCommentsByGameIdTest(@Param("gameId") String gameId, @Param("userId") String userId);
+
+
 }

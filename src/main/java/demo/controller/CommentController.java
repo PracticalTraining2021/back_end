@@ -26,8 +26,10 @@ public class CommentController {
 
     @ApiOperation("获取指定游戏的所有评论")
     @GetMapping("/all")
-    public Result allComments(@RequestParam(value = "gameId", required = true) String gameId) {
-        List<CommentVO> comments = commentService.getAllCommentsByGameId(gameId);
+    public Result allComments(@RequestParam(value = "gameId", required = true) String gameId,
+                              HttpServletRequest request) {
+        String userId = (String) request.getSession().getAttribute("user");
+        List<CommentVO> comments = commentService.getAllCommentsByGameId(gameId, userId);
         return Result.OK().data(comments).build();
     }
 

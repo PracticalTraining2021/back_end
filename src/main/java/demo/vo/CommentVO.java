@@ -25,4 +25,5 @@ public class CommentVO {
     private long commentAt;
     private String avatar;
     private String nickname;
+    private boolean isLike;
 }

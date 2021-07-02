@@ -23,8 +23,18 @@ public class CommentService {
     @Resource
     private GameService gameService;
 
-    public List<CommentVO> getAllCommentsByGameId(String gameId) {
-        return commentMapper.getAllCommentsByGameId(gameId);
+    public List<CommentVO> getAllCommentsByGameId(String gameId, String userId) {
+//        List<CommentVO> commentVOList = commentMapper.getAllCommentsByGameId(gameId);
+//        if (userId == null)
+//            return commentVOList;
+//        for (CommentVO vo : commentVOList) {
+//            Integer count = commentMapper.getCountByUserIdAndCommentIdFromULC(userId, vo.getCommentId());
+//            vo.setLike(count != null && count > 0);
+//        }
+//        return commentVOList;
+
+        List<CommentVO> commentVOList = commentMapper.getAllCommentsByGameIdTest(gameId, userId);
+        return commentVOList;
     }
 
     //    增加评价
@@ -74,7 +84,6 @@ public class CommentService {
             map.put("details", "用户成功点赞该评价");
             return Result.OK().data(map).build();
         }
-
     }
 
 }
