@@ -15,6 +15,9 @@ public interface GameMapper extends BaseMapper<Game> {
     @Select("select * from game")
     List<Game> getAll();
 
+    @Select("select * from game  order by  RAND() LIMIT #{count}")
+    List<Game> getRandomGames(@Param("count") Integer count);
+
     @Update("update game set downloads = downloads +1 where game_id = #{gameId}")
     Integer increDownloads(@Param("gameId") String gameId);
 

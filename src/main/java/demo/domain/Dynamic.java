@@ -28,7 +28,7 @@ public class Dynamic implements Serializable {
 
     private String imgUrls;
 
-    private int likesCount;
+    private Integer likesCount;
 
-    private long publishAt;
+    private Long publishAt;
 }

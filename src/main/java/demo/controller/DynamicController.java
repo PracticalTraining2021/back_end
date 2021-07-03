@@ -43,8 +43,10 @@ public class DynamicController {
         String userId = (String) request.getSession().getAttribute("user");
         if (StringUtils.isEmpty(userId))
             throw new BusinessException(ErrorCode.BAD_REQUEST_COMMON, "用户未登录");
-        imageService.uploadImg(multipartFile);
-        dynamic.setImgUrls("http://119.91.130.198/images/" + multipartFile.getOriginalFilename());
+
+        String dynamicMidPath = "dynamic/";
+        imageService.uploadImg(multipartFile, dynamicMidPath);
+        dynamic.setImgUrls("http://119.91.130.198/images/" + dynamicMidPath + multipartFile.getOriginalFilename());
         dynamicService.createDynamic(dynamic, userId);
         return Result.OK().data("动态创建成功").build();
     }

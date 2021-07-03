@@ -1,11 +1,14 @@
 package demo.service;
 
+import demo.bo.GameBO;
 import demo.domain.Game;
 import demo.domain.UserLikesGame;
 import demo.exception.BusinessException;
 import demo.exception.ErrorCode;
 import demo.mapper.GameMapper;
 import demo.vo.Result;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -19,12 +22,22 @@ public class GameService {
     @Resource
     private GameMapper gameMapper;
 
+    @Resource
+    private ImageService imageService;
+
+    @Value("${prefix}")
+    private String prefix;
+
     public Game getById(String gameId) {
         return gameMapper.selectById(gameId);
     }
 
     public List<Game> getAllGames() {
         return gameMapper.getAll();
+    }
+
+    public List<Game> getRandomGames(Integer count) {
+        return gameMapper.getRandomGames(count);
     }
 
     //    递增下载量
@@ -81,5 +94,27 @@ public class GameService {
     public boolean isUserLikeGame(String gameId, String userId) {
         UserLikesGame ulg = new UserLikesGame(userId, gameId);
         return gameMapper.getCountByUlg(ulg) > 0;
+    }
+
+    public Integer insertGame2(GameBO gameBO) {
+        // 保存上传的游戏图标和展示图
+        String iconMidPath = "icon/";
+        String ddMidPath = "display-drawings/";
+        imageService.uploadImg(gameBO.getIcon(), iconMidPath);
+        imageService.uploadImg(gameBO.getDisplayDrawings(), ddMidPath);
+
+        // 将游戏信息插入数据库
+        String iconName = gameBO.getIcon().getOriginalFilename();
+        String ddName = gameBO.getDisplayDrawings().getOriginalFilename();
+        Game game = new Game();
+        BeanUtils.copyProperties(gameBO, game);
+        game.setIcon("http://119.91.130.198/images/" + iconMidPath + iconName);
+        game.setDisplayDrawings("http://119.91.130.198/images/" + ddMidPath + ddName);
+
+        return gameMapper.insert(game);
+    }
+
+    public Integer deleteGame(String gameId) {
+        return gameMapper.deleteById(gameId);
     }
 }

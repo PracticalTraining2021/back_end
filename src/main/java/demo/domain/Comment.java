@@ -23,5 +23,5 @@ public class Comment {
     @ApiModelProperty("点赞数")
     private Integer likesCount;
     @ApiModelProperty("评价时间")
-    private long commentAt;
+    private Long commentAt;
 }

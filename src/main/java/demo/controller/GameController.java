@@ -1,5 +1,6 @@
 package demo.controller;
 
+import demo.bo.GameBO;
 import demo.domain.Game;
 import demo.domain.UserLikesGame;
 import demo.exception.BusinessException;
@@ -30,6 +31,13 @@ public class GameController {
     public Result getAllGame() {
         List<Game> allGames = gameService.getAllGames();
         return Result.OK().data(allGames).build();
+    }
+
+    @ApiOperation("随机获取指定数量的游戏")
+    @GetMapping("/random")
+    public Result getRandomGame(@RequestParam("count") Integer count) {
+        List<Game> games = gameService.getRandomGames(count);
+        return Result.OK().data(games).build();
     }
 
     @ApiOperation("获取指定游戏实体的信息")
@@ -68,10 +76,28 @@ public class GameController {
         return result;
     }
 
+    @ApiOperation("添加游戏（版本1）")
     @PostMapping("/addGame")
     public Result insertGame(@RequestBody Game game) {
         game.setGameId(null);
         gameService.insertGame(game);
         return Result.OK().data("添加游戏成功").build();
     }
+
+    @ApiOperation("添加游戏（版本2）")
+    @PostMapping("/addGame2")
+    public Result insertGame2(GameBO gameBO) {
+        Integer result = gameService.insertGame2(gameBO);
+        if (result > 0) return Result.OK().data("添加游戏成功").build();
+        return Result.BAD().data("添加游戏过程中出现未知错误===>insertGame2").build();
+    }
+
+    @ApiOperation("删除游戏")
+    @DeleteMapping("/")
+    public Result deleteGame(String gameId) {
+        Integer res = gameService.deleteGame(gameId);
+        if (res > 0) return Result.OK().data("删除游戏成功").build();
+        return Result.BAD().data("游戏不存在或删除游戏过程中出现未知错误===>deleteGame").build();
+    }
+
 }

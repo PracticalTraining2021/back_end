@@ -1,7 +1,7 @@
 package demo.vo;
 
 public class Result {
-    private int status;
+    private Integer status;
     private String msg;
     private Object data;
 
