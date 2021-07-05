@@ -30,12 +30,10 @@ public class ImageService {
         doUpload(multipartFile, distPath);
     }
 
-    public void uploadImg(MultipartFile multipartFile, String midPath) {
-        if (StringUtils.isEmpty(midPath)) uploadImg(multipartFile);
+    public void uploadImg(MultipartFile multipartFile, String postPath) {
+        if (StringUtils.isEmpty(postPath)) uploadImg(multipartFile);
 
-        String fileName = multipartFile.getOriginalFilename();
-//        添加中间路径
-        String distPath = prefix + midPath + fileName;
+        String distPath = prefix + postPath;
         doUpload(multipartFile, distPath);
     }
 

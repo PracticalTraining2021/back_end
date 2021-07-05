@@ -45,6 +45,7 @@ public class GlobalExceptionHandler {
 //        HttpUtil.setResponseStatus(response, ex.getErrorCode());
         return ex.getErrorResult();
     }
+    
 
     @ExceptionHandler(Exception.class)
     @ResponseBody

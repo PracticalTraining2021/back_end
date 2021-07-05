@@ -1,5 +1,6 @@
 package demo.controller;
 
+import demo.bo.CommentBO;
 import demo.domain.Comment;
 import demo.domain.UserLikesComment;
 import demo.exception.BusinessException;
@@ -9,11 +10,13 @@ import demo.vo.CommentVO;
 import demo.vo.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.BeanUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -36,16 +39,19 @@ public class CommentController {
 
     @ApiOperation("为指定游戏添加评论")
     @PostMapping("/addComment")
-    public Result insertComment(@RequestBody Comment comment, HttpServletRequest request) {
+    public Result insertComment(@RequestBody CommentBO commentBO, HttpServletRequest request) {
         String userId = (String) request.getSession().getAttribute("user");
         if (StringUtils.isEmpty(userId))
             throw new BusinessException(ErrorCode.BAD_REQUEST_COMMON, "用户未登录");
-        if (StringUtils.isEmpty(comment.getGameId()))
+        if (StringUtils.isEmpty(commentBO.getGameId()))
             throw new BusinessException(ErrorCode.BAD_REQUEST_COMMON, "请求体中缺少参数：gameId");
-//        return Result.BAD().data("缺少gameId").build();
 
+        Comment comment = new Comment();
+        BeanUtils.copyProperties(commentBO, comment);
         comment.setUserId(userId);
+        comment.setCommentAt((new Date()).getTime());
         Result result = commentService.addComment(comment);
+        
         return result;
     }
 

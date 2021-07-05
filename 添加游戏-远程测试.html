@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Document</title>
+</head>
+<body>
+<form
+        action="http://119.91.130.198/api/game/addGame2"
+        enctype="multipart/form-data"
+        method="post"
+>
+    游戏简介：<input type="text" name="briefIntro"/><br/>
+    发行商：<input type="text" name="issuer"/><br/>
+    游戏名称：<input type="text" name="name"/><br/>
+    游戏大小：<input type="number" name="size"/><br/>
+    游戏类型：<input type="text" name="category"/><br/>
+    游戏图标：<input type="file" name="icon"/><br/>
+    游戏展示图（可多选）：<input type="file" name="displayDrawings" multiple/><br/>
+    <input type="submit" style="color: red" value="添加游戏"/>
+</form>
+</body>
+</html>

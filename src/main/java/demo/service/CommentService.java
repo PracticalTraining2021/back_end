@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,16 +34,11 @@ public class CommentService {
         if (isExist)
             return Result.BAD().data("该用户已评价该游戏").build();
 
-
-        comment.setCommentId(null);
         comment.setLikesCount(0);
         if (comment.getScore() == 0)
             comment.setScore(10);
         if (StringUtils.isEmpty(comment.getContent()))
             comment.setContent("体验很好");
-        if (comment.getCommentAt() == 0)
-            comment.setCommentAt((new Date()).getTime());
-
 
         gameService.computeAvgScore(comment.getGameId(), comment.getScore());
         commentMapper.insert(comment);
@@ -82,4 +76,8 @@ public class CommentService {
         }
     }
 
+    public static void main(String[] args) {
+        Long a = null;
+        System.out.println(a == 0);
+    }
 }

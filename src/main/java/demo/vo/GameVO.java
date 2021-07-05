@@ -19,5 +19,6 @@ public class GameVO {
     private String icon;
     private String displayDrawings;
     private String briefIntro;
+    private String category;
     private boolean isCurrentUserLikes;
 }

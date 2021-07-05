@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -22,6 +23,10 @@ public class GameBO implements Serializable {
     private String issuer;
     @ApiModelProperty("游戏简介")
     private String briefIntro;
+    @ApiModelProperty("游戏类型")
+    private String category;
+    @ApiModelProperty("游戏图标")
     private MultipartFile icon;
-    private MultipartFile displayDrawings;
+    @ApiModelProperty("游戏展示图")
+    private List<MultipartFile> displayDrawings;
 }

@@ -1,5 +1,7 @@
 package demo.service;
 
+import com.baomidou.mybatisplus.core.incrementer.DefaultIdentifierGenerator;
+import com.baomidou.mybatisplus.core.incrementer.IdentifierGenerator;
 import demo.bo.GameBO;
 import demo.domain.Game;
 import demo.domain.UserLikesGame;
@@ -10,6 +12,8 @@ import demo.vo.Result;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
@@ -97,24 +101,92 @@ public class GameService {
     }
 
     public Integer insertGame2(GameBO gameBO) {
-        // 保存上传的游戏图标和展示图
-        String iconMidPath = "icon/";
-        String ddMidPath = "display-drawings/";
-        imageService.uploadImg(gameBO.getIcon(), iconMidPath);
-        imageService.uploadImg(gameBO.getDisplayDrawings(), ddMidPath);
+        String imgPrefix = "http://119.91.130.198/images/";
+        IdentifierGenerator idGen = new DefaultIdentifierGenerator();
 
-        // 将游戏信息插入数据库
-        String iconName = gameBO.getIcon().getOriginalFilename();
-        String ddName = gameBO.getDisplayDrawings().getOriginalFilename();
         Game game = new Game();
         BeanUtils.copyProperties(gameBO, game);
-        game.setIcon("http://119.91.130.198/images/" + iconMidPath + iconName);
-        game.setDisplayDrawings("http://119.91.130.198/images/" + ddMidPath + ddName);
+        String gameId = idGen.nextId(game).toString();
+        game.setGameId(gameId);
+
+//        上传图标并设置game的icon属性为图标可从服务器获取的url
+//        如，http://119.91.130.198/images/games/123123/icon-aaa.png
+        String iconMidPath = "games/" + gameId + "-icon-" + gameBO.getIcon().getOriginalFilename();
+        imageService.uploadImg(gameBO.getIcon(), iconMidPath);
+        game.setIcon(imgPrefix + iconMidPath);
+
+//        上传展示图并设置game的displayDrawings为展示图可从服务器获取的url
+//        多张展示图路径以 | 符号分隔
+//        如，http://119.91.130.198/images/games/123123/dd-1-aaa.png|http://119.91.130.198/images/games/123123/dd-2-bbb.png
+        Integer count = 1;
+        StringBuilder ddPaths = new StringBuilder();
+        String ddMidPath = "games/" + gameId + "-dd-";
+        for (MultipartFile file : gameBO.getDisplayDrawings()) {
+            String path = ddMidPath + (count++) + "-" + file.getOriginalFilename();
+            imageService.uploadImg(file, path);
+            ddPaths.append(imgPrefix).append(path).append("|");
+        }
+        if (ddPaths.length() > 0)
+            ddPaths.deleteCharAt(ddPaths.length() - 1);
+        game.setDisplayDrawings(ddPaths.toString());
+
 
         return gameMapper.insert(game);
     }
 
     public Integer deleteGame(String gameId) {
         return gameMapper.deleteById(gameId);
+    }
+
+    public List<Game> getAllGamesByAvgScoreDesc() {
+        return gameMapper.getAllGamesByAvgScoreDesc();
+    }
+
+    public List<Game> getAllGamesByInterestCountDesc() {
+        return gameMapper.getAllGamesByInterestCountDesc();
+    }
+
+    public List<Game> getGamesByCategory(String category) {
+        return gameMapper.getGamesByCategory(category);
+    }
+
+    public Integer updateGame(Game game, GameBO gameBO) {
+        String imgPrefix = "http://119.91.130.198/images/";
+
+        if (!StringUtils.isEmpty(gameBO.getName())) game.setName(gameBO.getName());
+        if (!StringUtils.isEmpty(gameBO.getIssuer())) game.setIssuer(gameBO.getIssuer());
+        if (!StringUtils.isEmpty(gameBO.getBriefIntro())) game.setBriefIntro(gameBO.getBriefIntro());
+        if (!StringUtils.isEmpty(gameBO.getCategory())) game.setCategory(gameBO.getCategory());
+        if (gameBO.getSize() != null) game.setSize(gameBO.getSize());
+        String gameId = game.getGameId();
+
+//        上传图标并设置game的icon属性为图标可从服务器获取的url
+//        如，http://119.91.130.198/images/games/123123/icon-aaa.png
+        if (gameBO.getIcon() != null) {
+            String iconMidPath = "games/" + gameId + "-icon-" + gameBO.getIcon().getOriginalFilename();
+            imageService.uploadImg(gameBO.getIcon(), iconMidPath);
+            game.setIcon(imgPrefix + iconMidPath);
+        }
+
+//        上传展示图并设置game的displayDrawings为展示图可从服务器获取的url
+//        多张展示图路径以 | 符号分隔
+//        如，http://119.91.130.198/images/games/123123/dd-1-aaa.png|http://119.91.130.198/images/games/123123/dd-2-bbb.png
+        if (gameBO.getDisplayDrawings() != null) {
+            Integer count = 1;
+            StringBuilder ddPaths = new StringBuilder();
+            String ddMidPath = "games/" + gameId + "-dd-";
+            for (MultipartFile file : gameBO.getDisplayDrawings()) {
+                String path = ddMidPath + (count++) + "-" + file.getOriginalFilename();
+                imageService.uploadImg(file, path);
+                ddPaths.append(imgPrefix).append(path).append("|");
+            }
+            if (ddPaths.length() > 0) {
+                ddPaths.deleteCharAt(ddPaths.length() - 1);
+            }
+            game.setDisplayDrawings(ddPaths.toString());
+        }
+
+        gameMapper.deleteById(game.getGameId());
+        return gameMapper.insert(game);
     }
 }

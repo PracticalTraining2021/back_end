@@ -46,4 +46,13 @@ public interface GameMapper extends BaseMapper<Game> {
     @Delete("delete from user_likes_game " +
             "where game_id = #{ulg.gameId} and user_id = #{ulg.userId}")
     Integer deleteByUlg(@Param("ulg") UserLikesGame ulg);
+
+    @Select("select * from game order by interest_count desc")
+    List<Game> getAllGamesByInterestCountDesc();
+
+    @Select("select * from game order by avg_score desc")
+    List<Game> getAllGamesByAvgScoreDesc();
+
+    @Select("select * from game where category like CONCAT('%',#{category},'%')")
+    List<Game> getGamesByCategory(@Param("category") String category);
 }

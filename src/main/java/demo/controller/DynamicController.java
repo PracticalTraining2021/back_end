@@ -14,10 +14,7 @@ import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
@@ -51,15 +48,6 @@ public class DynamicController {
         return Result.OK().data("动态创建成功").build();
     }
 
-    @GetMapping("/getAllDynamic")
-    @ApiOperation("按时间获取所有动态")
-    public Result getAllDynamic(HttpServletRequest request) {
-        String userId = (String) request.getSession().getAttribute("user");
-        if (StringUtils.isEmpty(userId))
-            throw new BusinessException(ErrorCode.BAD_REQUEST_COMMON, "用户未登录");
-        return Result.OK().data(dynamicService.selectAllDynamic(userId)).build();
-    }
-
     @GetMapping("/getUserDynamic")
     @ApiOperation("查看用户自己的动态")
     public Result getUserDynamic(HttpServletRequest request) {
@@ -67,6 +55,15 @@ public class DynamicController {
         if (StringUtils.isEmpty(userId))
             throw new BusinessException(ErrorCode.BAD_REQUEST_COMMON, "用户未登录");
         return Result.OK().data(dynamicService.getUserDynamic(userId)).build();
+    }
+
+    @GetMapping("/getAllDynamic")
+    @ApiOperation("按时间获取所有动态")
+    public Result getAllDynamic(HttpServletRequest request) {
+        String userId = (String) request.getSession().getAttribute("user");
+        if (StringUtils.isEmpty(userId))
+            throw new BusinessException(ErrorCode.BAD_REQUEST_COMMON, "用户未登录");
+        return Result.OK().data(dynamicService.selectAllDynamic(userId)).build();
     }
 
     @PostMapping("/updateDynamic")
@@ -162,5 +159,23 @@ public class DynamicController {
             throw new BusinessException(ErrorCode.BAD_REQUEST_COMMON, "用户未登录");
         List<DynamicUserGameVO> result = dynamicService.getMyFavouritesGameDynamic(userId);
         return Result.OK().data(result).build();
+    }
+
+    @PostMapping("/dynamic/uploadImg")
+    @ApiOperation("上传动态图片")
+    public Result uploadImg(MultipartFile file, HttpServletRequest request) {
+        String userId = (String) request.getSession().getAttribute("user");
+        if (StringUtils.isEmpty(userId))
+            throw new BusinessException(ErrorCode.BAD_REQUEST_COMMON, "用户未登录");
+
+        String result = dynamicService.uploadImg(file);
+        return Result.OK().data(result).build();
+    }
+
+    @DeleteMapping("/dynamic/deleteImg")
+    @ApiOperation("删除动态图片")
+    public Result deleteImg(String url) {
+        dynamicService.deleteImg(url);
+        return Result.OK().data("成功删除").build();
     }
 }

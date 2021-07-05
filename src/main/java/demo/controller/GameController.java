@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @Api(tags = {"游戏相关接口"})
@@ -98,6 +99,40 @@ public class GameController {
         Integer res = gameService.deleteGame(gameId);
         if (res > 0) return Result.OK().data("删除游戏成功").build();
         return Result.BAD().data("游戏不存在或删除游戏过程中出现未知错误===>deleteGame").build();
+    }
+
+    @ApiOperation("按avgScore（降序）获取游戏列表")
+    @GetMapping("/allByAvgScore")
+    public Result getAllGamesByAvgScoreDesc() {
+        List<Game> games = gameService.getAllGamesByAvgScoreDesc();
+        return Result.OK().data(games).build();
+    }
+
+    @ApiOperation("按interestCount（降序）获取游戏列表")
+    @GetMapping("/allByInterestCount")
+    public Result getAllGamesByInterestCountDesc() {
+        List<Game> games = gameService.getAllGamesByInterestCountDesc();
+        return Result.OK().data(games).build();
+    }
+
+    @ApiOperation("按category获取游戏列表")
+    @GetMapping("/category")
+    public Result getGamesByCategory(String category) {
+        List<Game> games = gameService.getGamesByCategory(category);
+        return Result.OK().data(games).build();
+    }
+
+    @ApiOperation("修改游戏实体信息")
+    @PostMapping("/update")
+    public Result updateGame(String gameId, GameBO gameBO) {
+        Game game = gameService.getById(gameId);
+        if (Objects.isNull(game))
+            throw new BusinessException(ErrorCode.BAD_REQUEST_COMMON, "该游戏不存在");
+
+        Integer result = gameService.updateGame(game, gameBO);
+        if (result > 0) return Result.OK().data("修改游戏成功").build();
+
+        return Result.BAD().data("修改游戏过程出现未知错误").build();
     }
 
 }

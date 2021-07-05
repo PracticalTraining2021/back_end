@@ -10,9 +10,12 @@ import demo.vo.DynamicVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
@@ -23,6 +26,12 @@ import java.util.List;
 public class DynamicService {
 
     private Logger log = LoggerFactory.getLogger(getClass());
+
+    @Resource
+    private ImageService imageService;
+
+    @Value("${prefix}")
+    private String prefix;
 
     @Resource
     private DynamicMapper dynamicMapper;
@@ -200,8 +209,22 @@ public class DynamicService {
         return transferDynamic(dynamicList, userId);
     }
 
-//    public static void main(String[] args) {
-//        System.out.println((new Date()).getTime());
-//        System.out.println(new java.sql.Date((new Date()).getTime()));
-//    }
+    public String uploadImg(MultipartFile file) {
+        String dynamicImgPrefix = "http://119.91.130.198/images/";
+        String filePath = "dynamic/" + new Date().getTime() + file.getOriginalFilename();
+        imageService.uploadImg(file, filePath);
+        return dynamicImgPrefix + filePath;
+    }
+
+    public void deleteImg(String url) {
+        String filePath = prefix + url.substring(url.indexOf("dynamic"));
+        File file = new File(filePath);
+        if (file.exists())
+            file.delete();
+    }
+
+    public static void main(String[] args) {
+        String url = "http://119.91.130.198/images/dynamic/1625470512520smduck.png";
+        System.out.println(url.substring(url.indexOf("dynamic")));
+    }
 }

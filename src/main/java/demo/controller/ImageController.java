@@ -1,11 +1,8 @@
 package demo.controller;
 
 import demo.vo.Result;
-import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
@@ -13,9 +10,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-@Api(tags = {"图片上传或下载接口"})
-@RestController
-@RequestMapping("/image")
+//@Api(tags = {"图片上传或下载接口"})
+//@RestController
+//@RequestMapping("/image")
 public class ImageController {
 
     @Value("${prefix}")
