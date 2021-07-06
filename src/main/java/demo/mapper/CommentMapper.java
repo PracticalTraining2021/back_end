@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 public interface CommentMapper extends BaseMapper<Comment> {
 
-    @Select("select comment_id,game_id,c.user_id,content,score,likes_count,comment_at,avatar,nickname from comment c,user u where c.game_id = #{gameId} and c.user_id = u.user_id")
+    @Select("select c.comment_id,c.game_id,c.user_id,c.content,c.score,c.likes_count,c.comment_at,u.avatar,u.nickname from comment c,user u where c.game_id = #{gameId} and c.user_id = u.user_id")
     List<CommentVO> getAllCommentsByGameId(String gameId);
 
     @Select("select count(*) from comment where user_id = #{userId} and game_id = #{gameId}")
@@ -51,7 +51,7 @@ public interface CommentMapper extends BaseMapper<Comment> {
             "where user_id = #{ulc.userId} and comment_id = #{ulc.commentId}")
     Integer deleteByUlc(@Param("ulc") UserLikesComment ulc);
 
-    @Select("select comment_id,game_id,c.user_id,content,score,likes_count,comment_at,avatar,nickname,(select count(*) from user_likes_comment s where s.user_id=#{userId} and s.comment_id=c.comment_id) as is_like from comment c,user u where c.game_id = #{gameId} and c.user_id = u.user_id")
+    @Select("select c.comment_id,c.game_id,c.user_id,c.content,c.score,c.likes_count,c.comment_at,u.avatar,u.nickname,(select count(*) from user_likes_comment s where s.user_id=#{userId} and s.comment_id=c.comment_id) as is_like from comment c,user u where c.game_id = #{gameId} and c.user_id = u.user_id")
     List<CommentVO> getAllCommentsByGameIdTest(@Param("gameId") String gameId, @Param("userId") String userId);
 
 

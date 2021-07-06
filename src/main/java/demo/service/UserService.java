@@ -16,6 +16,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
@@ -139,6 +140,22 @@ public class UserService {
         if (!Objects.equals(encodedOldPwd, user.getPassword()))
             throw new BusinessException(ErrorCode.BAD_REQUEST_COMMON, "原密码不正确");
 
-        return userMapper.updatePwd(newPwd, userId);
+        return userMapper.updatePwd(DigestUtils.md5DigestAsHex(newPwd.getBytes()), userId);
+    }
+
+    public Integer bindUserToGame(String userId, String gameId) {
+        User user = userMapper.selectById(userId);
+        if (user == null)
+            throw new BusinessException(ErrorCode.BAD_REQUEST_COMMON, "不存在该用户");
+
+//        如果gameId为空，则更新为空
+        if (StringUtils.isEmpty(gameId))
+            return userMapper.bindUserToGame(userId, gameId);
+
+        Game game = gameMapper.selectById(gameId);
+        if (game == null)
+            throw new BusinessException(ErrorCode.BAD_REQUEST_COMMON, "不存在该游戏");
+
+        return userMapper.bindUserToGame(userId, gameId);
     }
 }

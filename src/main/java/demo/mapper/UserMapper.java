@@ -29,4 +29,7 @@ public interface UserMapper extends BaseMapper<User> {
 
     @Select("select count(*) from user where nickname = #{nickname}")
     Integer getCountByNickname(@Param("nickname") String nickname);
+
+    @Update("update user set game_id = #{gameId} where user_id = #{userId}")
+    Integer bindUserToGame(@Param("userId") String userId, @Param("gameId") String gameId);
 }

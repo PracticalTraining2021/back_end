@@ -1,6 +1,7 @@
 package demo.controller;
 
 
+import demo.bo.PasswordBO;
 import demo.exception.BusinessException;
 import demo.exception.ErrorCode;
 import demo.service.UserService;
@@ -8,12 +9,8 @@ import demo.vo.Result;
 import demo.vo.UserVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
@@ -90,14 +87,27 @@ public class UserController {
 
     @PostMapping("/changePassword")
     @ApiOperation("修改用户密码")
-    public Result changePwd(@RequestParam("oldPwd") String oldPwd, @Param("newPwd") String newPwd, HttpServletRequest request) {
+    public Result changePwd(@RequestBody PasswordBO pwdBO, HttpServletRequest request) {
         String userId = (String) request.getSession().getAttribute("user");
         if (StringUtils.isEmpty(userId))
             throw new BusinessException(ErrorCode.BAD_REQUEST_COMMON, "用户未登录");
 
-        Integer result = userService.changePwd(oldPwd, newPwd, userId);
+        Integer result = userService.changePwd(pwdBO.getOldPwd(), pwdBO.getNewPwd(), userId);
         if (result > 0) return Result.OK().data("修改密码成功").build();
 
         return Result.BAD().data("修改密码过程中出现未知错误").build();
+    }
+
+    @ApiOperation("绑定用户和游戏")
+    @PostMapping("/bindToGame")
+    public Result bindToGame(@RequestParam(value = "gameId", required = false) String gameId, HttpServletRequest request) {
+        String userId = (String) request.getSession().getAttribute("user");
+        if (StringUtils.isEmpty(userId))
+            throw new BusinessException(ErrorCode.BAD_REQUEST_COMMON, "用户未登录");
+
+        Integer res = userService.bindUserToGame(userId, gameId);
+        if (res > 0) return Result.OK().data("成功绑定用户到指定游戏").build();
+
+        return Result.BAD().data("绑定用户到游戏过程出现未知错误").build();
     }
 }
