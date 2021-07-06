@@ -8,11 +8,13 @@ import demo.vo.Result;
 import demo.vo.UserVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -60,5 +62,42 @@ public class UserController {
         return Result.OK().data(userService.getUserLikeGame(userId)).build();
     }
 
-    
+    @PostMapping("/avatar")
+    @ApiOperation("修改用户头像")
+    public Result uploadAvatar(MultipartFile file, HttpServletRequest request) {
+        String userId = (String) request.getSession().getAttribute("user");
+        if (StringUtils.isEmpty(userId))
+            throw new BusinessException(ErrorCode.BAD_REQUEST_COMMON, "用户未登录");
+
+        Integer result = userService.changeAvatar(file, userId);
+        if (result > 0) return Result.OK().data("修改用户头像成功").build();
+
+        return Result.BAD().data("修改用户头像过程出现未知错误").build();
+    }
+
+    @PostMapping("/changeNickname")
+    @ApiOperation("修改用户昵称")
+    public Result changeInfo(String nickname, HttpServletRequest request) {
+        String userId = (String) request.getSession().getAttribute("user");
+        if (StringUtils.isEmpty(userId))
+            throw new BusinessException(ErrorCode.BAD_REQUEST_COMMON, "用户未登录");
+
+        Integer result = userService.changeNickname(userId, nickname);
+        if (result > 0) return Result.OK().data("修改用户昵称成功").build();
+
+        return Result.BAD().data("修改昵称过程出现未知错误").build();
+    }
+
+    @PostMapping("/changePassword")
+    @ApiOperation("修改用户密码")
+    public Result changePwd(@RequestParam("oldPwd") String oldPwd, @Param("newPwd") String newPwd, HttpServletRequest request) {
+        String userId = (String) request.getSession().getAttribute("user");
+        if (StringUtils.isEmpty(userId))
+            throw new BusinessException(ErrorCode.BAD_REQUEST_COMMON, "用户未登录");
+
+        Integer result = userService.changePwd(oldPwd, newPwd, userId);
+        if (result > 0) return Result.OK().data("修改密码成功").build();
+
+        return Result.BAD().data("修改密码过程中出现未知错误").build();
+    }
 }

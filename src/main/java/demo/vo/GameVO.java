@@ -20,5 +20,6 @@ public class GameVO {
     private String displayDrawings;
     private String briefIntro;
     private String category;
+    private Double heat;
     private boolean isCurrentUserLikes;
 }

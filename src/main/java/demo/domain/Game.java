@@ -28,6 +28,7 @@ public class Game implements Serializable {
     private String displayDrawings;
     private String briefIntro;
     private String category;
+    private Double heat;
 
     public static void main(String[] args) {
         System.out.println(new DefaultIdentifierGenerator().nextId(null));

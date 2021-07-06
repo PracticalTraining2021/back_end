@@ -36,14 +36,11 @@ public class DynamicController {
 
     @PostMapping("/createDynamic")
     @ApiOperation("创建动态")
-    public Result createDynamic(DynamicVO dynamic, MultipartFile multipartFile, HttpServletRequest request) {
+    public Result createDynamic(@RequestBody DynamicVO dynamic, HttpServletRequest request) {
         String userId = (String) request.getSession().getAttribute("user");
         if (StringUtils.isEmpty(userId))
             throw new BusinessException(ErrorCode.BAD_REQUEST_COMMON, "用户未登录");
 
-        String dynamicMidPath = "dynamic/";
-        imageService.uploadImg(multipartFile, dynamicMidPath);
-        dynamic.setImgUrls("http://119.91.130.198/images/" + dynamicMidPath + multipartFile.getOriginalFilename());
         dynamicService.createDynamic(dynamic, userId);
         return Result.OK().data("动态创建成功").build();
     }

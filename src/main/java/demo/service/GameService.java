@@ -189,4 +189,16 @@ public class GameService {
         gameMapper.deleteById(game.getGameId());
         return gameMapper.insert(game);
     }
+
+    public List<String> getAllGameId() {
+        return gameMapper.getAllGameId();
+    }
+
+    public Integer updateHeatByGameId(String gameId, Double heat) {
+        return gameMapper.updateHeatByGameId(gameId, heat);
+    }
+
+    public List<Game> getAllGamesByHeat() {
+        return gameMapper.getAllGamesByHeat();
+    }
 }

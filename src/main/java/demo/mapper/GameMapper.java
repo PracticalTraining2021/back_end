@@ -55,4 +55,13 @@ public interface GameMapper extends BaseMapper<Game> {
 
     @Select("select * from game where category like CONCAT('%',#{category},'%')")
     List<Game> getGamesByCategory(@Param("category") String category);
+
+    @Select("select game_id from game")
+    List<String> getAllGameId();
+
+    @Update("update game set heat = #{heat} where game_id = #{gameId}")
+    Integer updateHeatByGameId(@Param("gameId") String gameId, @Param("heat") Double heat);
+
+    @Select("select * from game order by heat desc")
+    List<Game> getAllGamesByHeat();
 }

@@ -135,4 +135,9 @@ public class GameController {
         return Result.BAD().data("修改游戏过程出现未知错误").build();
     }
 
+    @ApiOperation("按照游戏热度获取游戏列表")
+    @GetMapping("/allByHeat")
+    public Result getAllGamesByHeat() {
+        return Result.OK().data(gameService.getAllGamesByHeat()).build();
+    }
 }

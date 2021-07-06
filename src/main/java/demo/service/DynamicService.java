@@ -1,6 +1,8 @@
 package demo.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.incrementer.DefaultIdentifierGenerator;
+import com.baomidou.mybatisplus.core.incrementer.IdentifierGenerator;
 import demo.domain.*;
 import demo.exception.BusinessException;
 import demo.exception.ErrorCode;
@@ -16,10 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 
 @Service
@@ -210,21 +209,50 @@ public class DynamicService {
     }
 
     public String uploadImg(MultipartFile file) {
-        String dynamicImgPrefix = "http://119.91.130.198/images/";
-        String filePath = "dynamic/" + new Date().getTime() + file.getOriginalFilename();
+        String imgPrefix = "http://119.91.130.198/images/";
+        IdentifierGenerator idGen = new DefaultIdentifierGenerator();
+        String filePath = "dynamic/" + idGen.nextUUID(file) + file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
         imageService.uploadImg(file, filePath);
-        return dynamicImgPrefix + filePath;
+        return imgPrefix + filePath;
     }
 
     public void deleteImg(String url) {
-        String filePath = prefix + url.substring(url.indexOf("dynamic"));
+        int index = url.indexOf("dynamic");
+        if (index < 0) return;
+        String filePath = prefix + url.substring(index);
         File file = new File(filePath);
+        log.info("===========手动删除动态图片：" + file.getAbsolutePath() + "================");
         if (file.exists())
             file.delete();
     }
 
-    public static void main(String[] args) {
-        String url = "http://119.91.130.198/images/dynamic/1625470512520smduck.png";
-        System.out.println(url.substring(url.indexOf("dynamic")));
+    public Set<String> getAllImgUrls() {
+        List<String> originUrls = dynamicMapper.getAllImgUrls();
+
+        File file = null;
+        Set<String> result = new HashSet<>();
+        if (originUrls != null) {
+            for (String img_urls : originUrls) {
+                String[] temp = img_urls.split("\\|");
+                for (String singleUrl : temp) {
+                    int index = singleUrl.lastIndexOf("dynamic");
+                    if (index > 0) {
+                        file = new File(prefix + singleUrl.substring(index));
+                        result.add(file.getAbsolutePath());
+                    }
+                }
+            }
+        }
+
+        return result;
     }
+
+    public List<Long> getPublishAtListByGameId(String gameId) {
+        return dynamicMapper.getPublishAtListByGameId(gameId);
+    }
+
+//    public static void main(String[] args) {
+//        String url = "http://119.91.130.198/images/dynamic/1625470512520smduck.png";
+//        System.out.println(url.substring(url.indexOf("dynamic")));
+//    }
 }
