@@ -1,24 +1,35 @@
 package demo.controller;
 
 
+import demo.bo.LoginBO;
 import demo.bo.PasswordBO;
+import demo.bo.RegisterBO;
 import demo.exception.BusinessException;
 import demo.exception.ErrorCode;
 import demo.service.UserService;
+import demo.utils.RSAUtils;
 import demo.vo.Result;
 import demo.vo.UserVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Map;
 
 @RestController
 @Api(tags = {"用户相关接口"})
 public class UserController {
+
+    private static Logger logger = LoggerFactory.getLogger(UserService.class);
+
+    private static final String KEYPAIR = "KEYPAIR";
 
     @Resource
     private UserService userService;
@@ -39,6 +50,13 @@ public class UserController {
         System.out.println("/userRegister");
         Result result = userService.userRegister(username, password, nickname);
         return result;
+    }
+
+    @ApiOperation("用户注销")
+    @PostMapping("/userLogout")
+    public Result userLogout(HttpServletRequest request) {
+        request.getSession().removeAttribute("user");
+        return Result.OK().data("用户注销成功").build();
     }
 
     @GetMapping("/userMessage")
@@ -109,5 +127,41 @@ public class UserController {
         if (res > 0) return Result.OK().data("成功绑定用户到指定游戏").build();
 
         return Result.BAD().data("绑定用户到游戏过程出现未知错误").build();
+    }
+
+    @ApiOperation("获取公钥")
+    @GetMapping("/publicKey")
+    public Result getPublicKey(HttpServletRequest request) {
+        try {
+            Map<String, Object> keyPair = RSAUtils.genKeyPair();
+            request.getSession().setAttribute(KEYPAIR, keyPair);
+            return Result.OK().data(RSAUtils.getPublicKey(keyPair)).build();
+        } catch (NoSuchAlgorithmException e) {
+            logger.error("获取密钥出现未知错误:");
+            logger.error(e.getLocalizedMessage());
+            throw new BusinessException(ErrorCode.SERVER_EXCEPTION, "请重新尝试获取密钥");
+        }
+    }
+
+    @ApiOperation("用户加密登录")
+    @PostMapping("/encryptedLogin")
+    public Result encryptedLogin(@RequestBody LoginBO loginBO, HttpServletRequest request) {
+        String privateKey = (String) request.getSession().getAttribute(KEYPAIR);
+        if (StringUtils.isEmpty(privateKey))
+            throw new BusinessException(ErrorCode.BAD_REQUEST_COMMON, "请先获取公钥加密后再登录");
+        UserVO userVO = userService.encryptedLogin(loginBO, privateKey);
+        request.getSession().removeAttribute(KEYPAIR);
+        return Result.OK().data(userVO).build();
+    }
+
+    @ApiOperation("用户加密注册")
+    @PostMapping("/encryptedRegister")
+    public Result encryptedRegister(@RequestBody RegisterBO registerBO, HttpServletRequest request) {
+        String privateKey = (String) request.getSession().getAttribute(KEYPAIR);
+        if (StringUtils.isEmpty(privateKey))
+            throw new BusinessException(ErrorCode.BAD_REQUEST_COMMON, "请先获取公钥加密后再注册");
+        UserVO userVO = userService.encryptedRegister(registerBO, privateKey);
+        request.getSession().removeAttribute(KEYPAIR);
+        return Result.OK().data(userVO).build();
     }
 }

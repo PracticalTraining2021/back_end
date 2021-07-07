@@ -2,6 +2,8 @@ package demo.service;
 
 import com.baomidou.mybatisplus.core.incrementer.DefaultIdentifierGenerator;
 import com.baomidou.mybatisplus.core.incrementer.IdentifierGenerator;
+import demo.bo.LoginBO;
+import demo.bo.RegisterBO;
 import demo.domain.Game;
 import demo.domain.User;
 import demo.domain.UserLikesGame;
@@ -10,8 +12,11 @@ import demo.exception.ErrorCode;
 import demo.mapper.GameMapper;
 import demo.mapper.UserLikesGameMapper;
 import demo.mapper.UserMapper;
+import demo.utils.RSAUtils;
 import demo.vo.Result;
 import demo.vo.UserVO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -21,11 +26,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
 @Service
 public class UserService {
+    private Logger logger = LoggerFactory.getLogger(UserService.class);
+
     @Resource
     private UserMapper userMapper;
     @Resource
@@ -74,6 +82,7 @@ public class UserService {
         user.setUsername(username);
         user.setPassword(DigestUtils.md5DigestAsHex(password.getBytes()));
         user.setNickname(nickname);
+        user.setCreateAt(new Date());
         Integer insertRes = userMapper.insert(user);
 
         if (insertRes == 0) return Result.BAD().data("注册失败").build();
@@ -157,5 +166,57 @@ public class UserService {
             throw new BusinessException(ErrorCode.BAD_REQUEST_COMMON, "不存在该游戏");
 
         return userMapper.bindUserToGame(userId, gameId);
+    }
+
+    //    用户加密登录
+    public UserVO encryptedLogin(LoginBO loginBO, String privateKey) {
+        User user = userMapper.getUserByUsername(loginBO.getUsername());
+        if (user == null)
+            throw new BusinessException(ErrorCode.BAD_REQUEST_COMMON, "该用户不存在");
+
+        try {
+//          解密前端传递过来的密码
+            String decryptedPwd = RSAUtils.decryptDataOnJava(loginBO.getPassword(), privateKey);
+            String encodedPwd = DigestUtils.md5DigestAsHex(decryptedPwd.getBytes());
+            if (!Objects.equals(user.getPassword(), encodedPwd))
+                throw new BusinessException(ErrorCode.BAD_REQUEST_COMMON, "用户名或密码不正确");
+
+            UserVO userVO = new UserVO();
+            BeanUtils.copyProperties(user, userVO);
+
+            return userVO;
+        } catch (Exception e) {
+            logger.error("私钥解密密文出错：");
+            logger.error(e.getLocalizedMessage());
+            throw new BusinessException(ErrorCode.BAD_REQUEST_COMMON, "密钥校验出错，请重新获取公钥后登录");
+        }
+    }
+
+    //    用户加密注册
+    public UserVO encryptedRegister(RegisterBO registerBO, String privateKey) {
+        User user = userMapper.selectById(registerBO.getUsername());
+        if (user != null)
+            throw new BusinessException(ErrorCode.BAD_REQUEST_COMMON, "该用户已存在");
+
+        try {
+            String decryptedPwd = RSAUtils.decryptDataOnJava(registerBO.getPassword(), privateKey);
+            user = new User();
+            BeanUtils.copyProperties(registerBO, user);
+            user.setPassword(DigestUtils.md5DigestAsHex(decryptedPwd.getBytes()));
+            Integer insertRes = userMapper.insert(user);
+
+            if (insertRes > 0) {
+                UserVO userVO = new UserVO();
+                BeanUtils.copyProperties(user, userVO);
+                return userVO;
+            }
+
+            throw new BusinessException(ErrorCode.SERVER_EXCEPTION, "注册用户过程出现未知错误");
+        } catch (Exception e) {
+            logger.error("私钥解密密文出错：");
+            logger.error(e.getLocalizedMessage());
+            throw new BusinessException(ErrorCode.BAD_REQUEST_COMMON, "密钥校验出错，请重新获取公钥后注册");
+        }
+
     }
 }
