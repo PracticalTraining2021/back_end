@@ -1,4 +1,8 @@
 spring:
+  http:
+    multipart:
+      maxFileSize: 10MB
+      maxRequestSize: 100MB
   datasource:
     username: root
     password: '123456'
@@ -11,3 +15,5 @@ mybatis-plus:
 
 logging:
   file: log/pc_5.log
+
+prefix: "/usr/local/tomcat/apache-tomcat-9.0.48/webapps/images/"

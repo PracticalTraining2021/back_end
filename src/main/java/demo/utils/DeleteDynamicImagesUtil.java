@@ -31,11 +31,11 @@ public class DeleteDynamicImagesUtil {
     private String prefix;
 
     //    定时任务：每隔1小时计算一次游戏热度
-    @Scheduled(initialDelay = 3600000, fixedRate = 3600000)
+    @Scheduled(fixedRate = 3600000)
     public void updateGameHeat() {
         logger.info("==================定时任务开始：计算游戏热度====================");
 //        当前的分钟数
-        Long currentMinute = new Date().getTime() / 60000;
+        Long currentMinute = new Date().getTime() / 3600000;
 
         List<String> gameIdList = gameService.getAllGameId();
         for (String gameId : gameIdList) {
@@ -44,12 +44,14 @@ public class DeleteDynamicImagesUtil {
 //            计算游戏热度
             Double heat = Double.valueOf(0);
             for (Long time : publishAtLiOfTheGame) {
+                time /= 3600000;
                 Long temp = currentMinute - time;
+                System.out.println("==========" + temp + "===========" + (double) 1 / temp + "================");
                 if (temp == 0) {
                     heat += 1;
                     continue;
                 }
-                heat += 1 / temp;
+                heat += (double) 1 / temp;
             }
 
             gameService.updateHeatByGameId(gameId, heat);
@@ -104,7 +106,5 @@ public class DeleteDynamicImagesUtil {
 //        urls.add("aaa");
 //        urls.add("bbb");
 //        System.out.println(urls.toString());
-
-
     }
 }

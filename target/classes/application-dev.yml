@@ -14,3 +14,5 @@ mybatis-plus:
 
 logging:
   file: log/pc_5.log
+
+prefix: "./images/"
