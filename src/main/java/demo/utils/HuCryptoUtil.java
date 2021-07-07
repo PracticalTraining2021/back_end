@@ -35,8 +35,10 @@ public class HuCryptoUtil {
 ////        私钥解密
 //        System.out.println(decryptData(decodedContent, privateKey));
 
-        String publicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCnBApXCLZ54Evy/xTZA0rjMybJ3/VtYPh1z1F7nxQ0UtsDCfLDxPdZn0NarlOAwS2i3E6eCEYDUWfDr4tcEo0bPIimDgplMjq73rCrfPajyCOWKVKbdgU17rfhsHC7kxFmj2y1EDDqlK5N6jFI6rEgHO1R8cIIIteJH2RYK4jW2QIDAQAB";
-        RSA rsa = new RSA(null, publicKey);
-        System.out.println(rsa.encryptBase64("111", KeyType.PublicKey));
+//        String publicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCnBApXCLZ54Evy/xTZA0rjMybJ3/VtYPh1z1F7nxQ0UtsDCfLDxPdZn0NarlOAwS2i3E6eCEYDUWfDr4tcEo0bPIimDgplMjq73rCrfPajyCOWKVKbdgU17rfhsHC7kxFmj2y1EDDqlK5N6jFI6rEgHO1R8cIIIteJH2RYK4jW2QIDAQAB";
+//        RSA rsa = new RSA(null, publicKey);
+//        System.out.println(rsa.encryptBase64("111", KeyType.PublicKey));
+
+        System.out.println(encryptData("111", "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCcQu3q2SArwMAB2fwWTkN91Nr3E+M/Jt7k+PT0D02JP2fy/TTa2cU7DPyYxJz1ryU1hmKyY4Cscu9PPFLD2x/xB/ar9PfdmJrT1Go6sTtCrqEdHqPVHBJVr6gP3beXm+rfMs4fhaXbsjG57ze5+yESRQnrBBAzVQlzrRKwYvPWbwIDAQAB"));
     }
 }

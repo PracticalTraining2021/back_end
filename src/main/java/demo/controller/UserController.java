@@ -41,7 +41,6 @@ public class UserController {
     @PostMapping("/userLogin")
     @ApiOperation("用户登录")
     public Result userLogin(@RequestParam("username") String username, @RequestParam("password") String password, HttpServletRequest request) {
-        System.out.println("/userLogin");
         Result result = userService.validateUser(username, password);
         if (result.getData().getClass() == UserVO.class)
             request.getSession().setAttribute("user", ((UserVO) result.getData()).getUserId());
@@ -152,6 +151,8 @@ public class UserController {
 
         UserVO userVO = userService.huEncryptedLogin(loginBO, rsa.getPrivateKeyBase64());
         request.getSession().removeAttribute(RSA_KEYPAIR);
+        request.getSession().setAttribute("user", userVO.getUserId());
+
         return Result.OK().data(userVO).build();
     }
 
