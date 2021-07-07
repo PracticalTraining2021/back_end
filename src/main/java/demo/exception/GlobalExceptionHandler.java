@@ -1,5 +1,6 @@
 package demo.exception;
 
+import cn.hutool.crypto.CryptoException;
 import demo.vo.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import java.sql.SQLSyntaxErrorException;
-import java.util.Arrays;
 import java.util.Set;
 
 /**
@@ -45,15 +45,23 @@ public class GlobalExceptionHandler {
 //        HttpUtil.setResponseStatus(response, ex.getErrorCode());
         return ex.getErrorResult();
     }
-    
+
+    @ExceptionHandler(CryptoException.class)
+    @ResponseBody
+    public Result expHandler(CryptoException e) {
+        logger.error(e.getLocalizedMessage());
+
+        return Result.BAD().data("密钥校验出错，请重新获取公钥再操作").build();
+    }
 
     @ExceptionHandler(Exception.class)
     @ResponseBody
     public Result expHandler(Exception e) {
+        logger.error("==================================");
         logger.error(e.getMessage());
-        System.out.println(Arrays.toString(e.getStackTrace()));
+        e.printStackTrace();
 
-        return Result.BAD().data(e.getMessage() + "abc").build();
+        return Result.BAD().data(e.getLocalizedMessage() + "==").build();
     }
 
     /**

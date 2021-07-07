@@ -1,4 +1,8 @@
 spring:
+  http:
+    multipart:
+      maxFileSize: 10MB
+      maxRequestSize: 100MB
   datasource:
     username: root
     password: '123456'

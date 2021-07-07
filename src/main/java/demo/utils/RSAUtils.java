@@ -33,17 +33,17 @@ public class RSAUtils {
     /**
      * RSA最大加密明文大小
      */
-    private static final int MAX_ENCRYPT_BLOCK = 117;
+    private static final int MAX_ENCRYPT_BLOCK = 245;
 
     /**
      * RSA最大解密密文大小
      */
-    private static final int MAX_DECRYPT_BLOCK = 128;
+    private static final int MAX_DECRYPT_BLOCK = 256;
 
     /**
      * RSA 位数 如果采用2048 上面最大加密和最大解密则须填写:  245 256
      */
-    private static final int INITIALIZE_LENGTH = 1024;
+    private static final int INITIALIZE_LENGTH = 2048;
 
     /**
      * <p>
@@ -213,8 +213,13 @@ public class RSAUtils {
 //        System.out.println(decodedData);
 //        System.out.println(decodedData.equals(data));
 
-        String data = "111";
-        String publicKey = "";
-        System.out.println(encryptedDataOnJava(data, publicKey));
+//        String data = "test001";
+//        String publicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCuR4zDJeN5BeUwXE7ZLMbNPRH/HgS/CzuxRC/umL1FZfFlfKt/wlLVBPLX76N5f1vMx2Bu1k6PLlrJY2G0sGqBsh92L0nOCbQdUDYIH1IyajHBWrKI/5aJ8U6yCmdIGVLa3UWugnj8yTd2dDxzxFByRN5V97VqYH9hIVvoGmP1WwIDAQAB";
+//        System.out.println(RSAEncryptedUtil.encryptedDataOnJava(data, publicKey));
+
+        String privateKey = "";
+//        String decodedData = "n7Jpx3ZFH8otNWYzIxkbSbPOXBsxunhz1L6+G6mvGFaoIL93k9V180SFulIWpH3Q5Fhdn4WwMgjb/yy8rBLSL2fAUg9gkkfu8JaoLkHtnEWNWOZsyUxNr8He7LnALwquGOETWqrRKVThjfThfBhr2k6YB99v40DiJgf/1lqnfd0=";
+        String decodedData = "";
+        System.out.println(decryptDataOnJava(decodedData, privateKey));
     }
 }

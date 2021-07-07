@@ -1,6 +1,7 @@
 package demo.controller;
 
 
+import cn.hutool.crypto.asymmetric.RSA;
 import demo.bo.LoginBO;
 import demo.bo.PasswordBO;
 import demo.bo.RegisterBO;
@@ -31,6 +32,8 @@ public class UserController {
     private static Logger logger = LoggerFactory.getLogger(UserService.class);
 
     private static final String KEYPAIR = "KEYPAIR";
+
+    private static final String RSA_KEYPAIR = "rsa";
 
     @Resource
     private UserService userService;
@@ -130,11 +133,52 @@ public class UserController {
         return Result.BAD().data("绑定用户到游戏过程出现未知错误").build();
     }
 
-    @ApiOperation("获取公钥")
+    @ApiOperation("获取-公钥")
     @GetMapping("/publicKey")
+    public Result getHuPublicKey(HttpServletRequest request) {
+        RSA rsa = new RSA();
+        request.getSession().setAttribute(RSA_KEYPAIR, rsa);
+        return Result.OK().data(rsa.getPublicKeyBase64()).build();
+    }
+
+    @ApiOperation("用户-加密登录")
+    @PostMapping("/encryptedLogin")
+    public Result huEncryptedLogin(@RequestBody LoginBO loginBO, HttpServletRequest request) {
+        RSA rsa = (RSA) request.getSession().getAttribute(RSA_KEYPAIR);
+        if (rsa == null) {
+            request.getSession().removeAttribute(RSA_KEYPAIR);
+            throw new BusinessException(ErrorCode.BAD_REQUEST_COMMON, "请先获取公钥加密后再登录");
+        }
+
+        UserVO userVO = userService.huEncryptedLogin(loginBO, rsa.getPrivateKeyBase64());
+        request.getSession().removeAttribute(RSA_KEYPAIR);
+        return Result.OK().data(userVO).build();
+    }
+
+    @ApiOperation("用户-加密注册")
+    @PostMapping("/encryptedRegister")
+    public Result huEncryptedRegister(@RequestBody RegisterBO registerBO, HttpServletRequest request) {
+        RSA rsa = (RSA) request.getSession().getAttribute(RSA_KEYPAIR);
+        if (rsa == null) {
+            request.getSession().removeAttribute(RSA_KEYPAIR);
+            throw new BusinessException(ErrorCode.BAD_REQUEST_COMMON, "请先获取公钥加密后再登录");
+        }
+
+        UserVO userVO = userService.huEncryptedRegister(registerBO, rsa.getPrivateKeyBase64());
+        request.getSession().removeAttribute(RSA_KEYPAIR);
+        return Result.OK().data(userVO).build();
+    }
+
+
+//    =============================================================================================================
+
+    //    @ApiOperation("获取公钥")
+//    @GetMapping("/publicKey")
     public Result getPublicKey(HttpServletRequest request) {
         try {
+            logger.error("获取公钥的sessionID：" + request.getSession().getId());
             Map<String, Object> keyPair = RSAUtils.genKeyPair();
+            logger.error("keyPair:" + keyPair);
             request.getSession().setAttribute(KEYPAIR, keyPair);
             return Result.OK().data(RSAUtils.getPublicKey(keyPair)).build();
         } catch (NoSuchAlgorithmException e) {
@@ -144,23 +188,32 @@ public class UserController {
         }
     }
 
-    @ApiOperation("用户加密登录")
-    @PostMapping("/encryptedLogin")
+    //    @ApiOperation("用户加密登录")
+//    @PostMapping("/encryptedLogin")
     public Result encryptedLogin(@RequestBody LoginBO loginBO, HttpServletRequest request) {
+        logger.error("用户加密登录的密码：" + loginBO.getPassword());
+        logger.error("用户加密登录的sessionID：" + request.getSession().getId());
         Map<String, Object> keyPair = (Map<String, Object>) request.getSession().getAttribute(KEYPAIR);
-        if (Objects.isNull(keyPair))
+        logger.error("keyPair:" + keyPair);
+        logger.error("privateKey:" + RSAUtils.getPrivateKey(keyPair));
+        logger.error("publicKey:" + RSAUtils.getPublicKey(keyPair));
+        if (Objects.isNull(keyPair)) {
+            request.getSession().removeAttribute(KEYPAIR);
             throw new BusinessException(ErrorCode.BAD_REQUEST_COMMON, "请先获取公钥加密后再登录");
+        }
         UserVO userVO = userService.encryptedLogin(loginBO, RSAUtils.getPrivateKey(keyPair));
         request.getSession().removeAttribute(KEYPAIR);
         return Result.OK().data(userVO).build();
     }
 
-    @ApiOperation("用户加密注册")
-    @PostMapping("/encryptedRegister")
+    //    @ApiOperation("用户加密注册")
+//    @PostMapping("/encryptedRegister")
     public Result encryptedRegister(@RequestBody RegisterBO registerBO, HttpServletRequest request) {
         Map<String, Object> keyPair = (Map<String, Object>) request.getSession().getAttribute(KEYPAIR);
-        if (Objects.isNull(keyPair))
-            throw new BusinessException(ErrorCode.BAD_REQUEST_COMMON, "请先获取公钥加密后再登录");
+        if (Objects.isNull(keyPair)) {
+            request.getSession().removeAttribute(KEYPAIR);
+            throw new BusinessException(ErrorCode.BAD_REQUEST_COMMON, "请先获取公钥加密后再注册");
+        }
         UserVO userVO = userService.encryptedRegister(registerBO, RSAUtils.getPrivateKey(keyPair));
         request.getSession().removeAttribute(KEYPAIR);
         return Result.OK().data(userVO).build();

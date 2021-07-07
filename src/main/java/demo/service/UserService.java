@@ -12,6 +12,7 @@ import demo.exception.ErrorCode;
 import demo.mapper.GameMapper;
 import demo.mapper.UserLikesGameMapper;
 import demo.mapper.UserMapper;
+import demo.utils.HuCryptoUtil;
 import demo.utils.RSAUtils;
 import demo.vo.Result;
 import demo.vo.UserVO;
@@ -169,6 +170,48 @@ public class UserService {
     }
 
     //    用户加密登录
+    public UserVO huEncryptedLogin(LoginBO loginBO, String privateKey) {
+        User user = userMapper.getUserByUsername(loginBO.getUsername());
+        if (user == null)
+            throw new BusinessException(ErrorCode.BAD_REQUEST_COMMON, "该用户不存在");
+
+//          解密前端传递过来的密码
+        String decryptedPwd = HuCryptoUtil.decryptData(loginBO.getPassword(), privateKey);
+        String encodedPwd = DigestUtils.md5DigestAsHex(decryptedPwd.getBytes());
+        if (!Objects.equals(user.getPassword(), encodedPwd))
+            throw new BusinessException(ErrorCode.BAD_REQUEST_COMMON, "用户名或密码不正确");
+
+        UserVO userVO = new UserVO();
+        BeanUtils.copyProperties(user, userVO);
+
+        return userVO;
+    }
+
+    //    用户加密注册
+    public UserVO huEncryptedRegister(RegisterBO registerBO, String privateKey) {
+        User user = userMapper.getUserByUsername(registerBO.getUsername());
+        if (user != null)
+            throw new BusinessException(ErrorCode.BAD_REQUEST_COMMON, "该用户已存在");
+
+        String decryptedPwd = HuCryptoUtil.decryptData(registerBO.getPassword(), privateKey);
+        user = new User();
+        BeanUtils.copyProperties(registerBO, user);
+        user.setPassword(DigestUtils.md5DigestAsHex(decryptedPwd.getBytes()));
+        Integer insertRes = userMapper.insert(user);
+
+        if (insertRes > 0) {
+            UserVO userVO = new UserVO();
+            BeanUtils.copyProperties(user, userVO);
+            return userVO;
+        }
+
+        throw new BusinessException(ErrorCode.SERVER_EXCEPTION, "注册用户过程出现未知错误");
+
+    }
+
+//    ==============================================================================================================
+
+    //    用户加密登录
     public UserVO encryptedLogin(LoginBO loginBO, String privateKey) {
         User user = userMapper.getUserByUsername(loginBO.getUsername());
         if (user == null)
@@ -194,7 +237,7 @@ public class UserService {
 
     //    用户加密注册
     public UserVO encryptedRegister(RegisterBO registerBO, String privateKey) {
-        User user = userMapper.selectById(registerBO.getUsername());
+        User user = userMapper.getUserByUsername(registerBO.getUsername());
         if (user != null)
             throw new BusinessException(ErrorCode.BAD_REQUEST_COMMON, "该用户已存在");
 
