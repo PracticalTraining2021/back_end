@@ -12,26 +12,7 @@ import java.security.spec.X509EncodedKeySpec;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- *
- */
 
-/**
- * <p>
- * RSA公钥/私钥/签名工具包
- * </p>
- * <p>
- * 罗纳德·李维斯特（Ron [R]ivest）、阿迪·萨莫尔（Adi [S]hamir）和伦纳德·阿德曼（Leonard [A]dleman）
- * </p>
- * <p>
- * 字符串格式的密钥在未在特殊说明情况下都为BASE64编码格式<br/>
- * 由于非对称加密速度极其缓慢，一般文件不使用它来加密而是使用对称加密，<br/>
- * 非对称加密算法可以用来对对称加密的密钥加密，这样保证密钥的安全也就保证了数据的安全
- * </p>
- *
- * @author monkey
- * @date 2018-10-29
- */
 public class RSAUtils {
 
     /**
@@ -91,7 +72,7 @@ public class RSAUtils {
      * </p>
      *
      * @param encryptedData 已加密数据
-     * @param privateKey 私钥(BASE64编码)
+     * @param privateKey    私钥(BASE64编码)
      * @return
      * @throws Exception
      */
@@ -128,7 +109,7 @@ public class RSAUtils {
      * 公钥加密
      * </p>
      *
-     * @param data 源数据
+     * @param data      源数据
      * @param publicKey 公钥(BASE64编码)
      * @return
      * @throws Exception
@@ -216,14 +197,14 @@ public class RSAUtils {
         return temp;
     }
 
-//    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception {
 ////        后端生成密钥对并拿到公钥
 //        Map<String, Object> keyPair = RSAUtils.genKeyPair();
 //        String publicKey = RSAUtils.getPublicKey(keyPair);
 ////        将公钥发送给前端
 ////        ...
 ////        前端加密并发送给后端
-//        String data = "1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111112112111122222222";
+//        String data = "111";
 //        String encodedData = RSAEncryptedUtil.encryptedDataOnJava(data, publicKey);
 //        System.out.println(encodedData);
 ////        ...
@@ -231,5 +212,9 @@ public class RSAUtils {
 //        String decodedData = RSAUtils.decryptDataOnJava(encodedData, RSAUtils.getPrivateKey(keyPair));
 //        System.out.println(decodedData);
 //        System.out.println(decodedData.equals(data));
-//    }
+
+        String data = "111";
+        String publicKey = "";
+        System.out.println(encryptedDataOnJava(data, publicKey));
+    }
 }

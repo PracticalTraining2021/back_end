@@ -22,6 +22,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Map;
+import java.util.Objects;
 
 @RestController
 @Api(tags = {"用户相关接口"})
@@ -146,10 +147,10 @@ public class UserController {
     @ApiOperation("用户加密登录")
     @PostMapping("/encryptedLogin")
     public Result encryptedLogin(@RequestBody LoginBO loginBO, HttpServletRequest request) {
-        String privateKey = (String) request.getSession().getAttribute(KEYPAIR);
-        if (StringUtils.isEmpty(privateKey))
+        Map<String, Object> keyPair = (Map<String, Object>) request.getSession().getAttribute(KEYPAIR);
+        if (Objects.isNull(keyPair))
             throw new BusinessException(ErrorCode.BAD_REQUEST_COMMON, "请先获取公钥加密后再登录");
-        UserVO userVO = userService.encryptedLogin(loginBO, privateKey);
+        UserVO userVO = userService.encryptedLogin(loginBO, RSAUtils.getPrivateKey(keyPair));
         request.getSession().removeAttribute(KEYPAIR);
         return Result.OK().data(userVO).build();
     }
@@ -157,10 +158,10 @@ public class UserController {
     @ApiOperation("用户加密注册")
     @PostMapping("/encryptedRegister")
     public Result encryptedRegister(@RequestBody RegisterBO registerBO, HttpServletRequest request) {
-        String privateKey = (String) request.getSession().getAttribute(KEYPAIR);
-        if (StringUtils.isEmpty(privateKey))
-            throw new BusinessException(ErrorCode.BAD_REQUEST_COMMON, "请先获取公钥加密后再注册");
-        UserVO userVO = userService.encryptedRegister(registerBO, privateKey);
+        Map<String, Object> keyPair = (Map<String, Object>) request.getSession().getAttribute(KEYPAIR);
+        if (Objects.isNull(keyPair))
+            throw new BusinessException(ErrorCode.BAD_REQUEST_COMMON, "请先获取公钥加密后再登录");
+        UserVO userVO = userService.encryptedRegister(registerBO, RSAUtils.getPrivateKey(keyPair));
         request.getSession().removeAttribute(KEYPAIR);
         return Result.OK().data(userVO).build();
     }
